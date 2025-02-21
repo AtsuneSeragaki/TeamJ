@@ -1,10 +1,12 @@
 #include "InGameScene.h"
 #include "../../Object/ReticleObject.h"
+#include "../../Object/Enemy/Enemy.h"
 
 // コンストラクタ
 InGameScene::InGameScene()
 {
 	CreateObject<ReticleObject>(Vector2D(0.0f, 0.0f));
+	CreateObject<Enemy>(Vector2D(0.0f, 0.0f));
 }
 
 // デストラクタ
