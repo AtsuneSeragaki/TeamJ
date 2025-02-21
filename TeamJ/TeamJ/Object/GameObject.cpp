@@ -16,6 +16,7 @@ void GameObject::Initialize()
 
 void GameObject::Update()
 {
+
 }
 
 void GameObject::Draw() const
