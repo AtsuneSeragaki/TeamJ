@@ -4,6 +4,9 @@
 
 class InGameScene : public SceneBase
 {
+private:
+
+
 
 public:
 	// コンストラクタ

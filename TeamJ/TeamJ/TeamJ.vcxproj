@@ -138,6 +138,7 @@
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Object\Enemy\Enemy.cpp" />
     <ClCompile Include="Object\GameObject.cpp" />
+    <ClCompile Include="Object\ReticleObject.cpp" />
     <ClCompile Include="Object\UI\Score\Score.cpp" />
     <ClCompile Include="Object\UI\Time\Time.cpp" />
     <ClCompile Include="Scene\End\EndScene.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="Object\Enemy\Enemy.h" />
     <ClInclude Include="Object\GameObject.h" />
+    <ClInclude Include="Object\ReticleObject.h" />
     <ClInclude Include="Object\UI\Score\Score.h" />
     <ClInclude Include="Object\UI\Time\Time.h" />
     <ClInclude Include="Scene\End\EndScene.h" />

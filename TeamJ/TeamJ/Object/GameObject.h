@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Utility/Vector2D.h"
+#define BULLET_MAX_NUN 5
 
 class GameObject
 {
