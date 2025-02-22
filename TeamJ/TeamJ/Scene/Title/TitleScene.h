@@ -5,6 +5,19 @@
 class TitleScene : public SceneBase
 {
 
+private:
+	int menu_num;
+
+	Vector2D location2;
+	Vector2D location3;
+	Vector2D location4;
+	Vector2D box2_size;
+	Vector2D box3_size;
+	Vector2D box4_size;
+
+	bool push_flg;
+	int cnt;
+
 public:
 	// コンストラクタ
 	TitleScene();
