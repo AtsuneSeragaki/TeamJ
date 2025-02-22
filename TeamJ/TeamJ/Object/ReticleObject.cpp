@@ -5,13 +5,15 @@
 
 void ReticleObject::Initialize()
 {
-	location = Vector2D(340.0f, 240.0f);
+	location = Vector2D(320.0f, 240.0f);
 
 	box_size = Vector2D(40.0f, 40.0f);
 
 	push_flg = false;
 
 	bullet = BULLET_MAX_NUN;
+
+	ejection_cnt = 0;
 
 	reload_cnt = 0;
 
@@ -42,12 +44,12 @@ void ReticleObject::Update()
 	//左スティックのx座標を加算
 	if (input->GetLeftStick().x>=0.1f|| input->GetLeftStick().x <= -0.1f)
 	{
-		location.x += input->GetLeftStick().x;
+		location.x += input->GetLeftStick().x * 7;
 	}
 	//左スティックのy座標を減算
 	if (input->GetLeftStick().y >= 0.1f || input->GetLeftStick().y <= -0.1f)
 	{
-		location.y -= input->GetLeftStick().y;
+		location.y -= input->GetLeftStick().y * 7;
 	}
 	//左に出ないようにする
 	if (location.x < 0.0f + box_size.x * 0.5f)
@@ -75,10 +77,11 @@ void ReticleObject::Update()
 		push_flg = true;
 		bullet--;
 		ejection_cnt++;
-		PlaySoundMem(sound[0], DX_PLAYTYPE_NORMAL, TRUE);
-		if (ejection_cnt <= 1)
+		PlaySoundMem(sound[0], DX_PLAYTYPE_BACK, TRUE);
+		if (ejection_cnt <= 60)
 		{
-			PlaySoundMem(sound[1], DX_PLAYTYPE_NORMAL, TRUE);
+			PlaySoundMem(sound[1], DX_PLAYTYPE_BACK, TRUE);
+			ejection_cnt = 0;
 		}
 	}
 	if (input->GetButtonUp(XINPUT_BUTTON_B))
@@ -89,6 +92,18 @@ void ReticleObject::Update()
 	if (bullet <= 0)
 	{
 		reload_cnt++;
+		if (reload_cnt == 30)
+		{
+			PlaySoundMem(sound[3], DX_PLAYTYPE_BACK, TRUE);
+		}
+		if (reload_cnt == 60)
+		{
+			PlaySoundMem(sound[4], DX_PLAYTYPE_BACK, TRUE);
+		}
+		if (reload_cnt == 90)
+		{
+			PlaySoundMem(sound[5], DX_PLAYTYPE_BACK, TRUE);
+		}
 		if (reload_cnt >= 90)
 		{
 			bullet = BULLET_MAX_NUN;
