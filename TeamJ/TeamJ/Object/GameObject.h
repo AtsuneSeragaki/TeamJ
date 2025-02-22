@@ -3,6 +3,15 @@
 #include "../Utility/Vector2D.h"
 #define BULLET_MAX_NUN 5
 
+enum ObjectType
+{
+	RETICLE,
+	ENEMY,
+	ENEMY1,
+	ENEMY2,
+	ENEMY3,
+};
+
 class GameObject
 {
 protected:
@@ -10,6 +19,7 @@ protected:
 	Vector2D box_size;   // 当たり判定
 	int graphic_images;  // オブジェクト画像
 	int flip_flag;       // 反転するか？
+	ObjectType type;
 
 public:
 	GameObject();

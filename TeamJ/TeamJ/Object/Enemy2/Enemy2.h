@@ -2,7 +2,7 @@
 
 #include "../GameObject.h"
 
-class Enemy : public GameObject
+class Enemy2 : public GameObject
 {
 private:
 	// int animation;				// アニメーション画像
@@ -10,8 +10,8 @@ private:
 	Vector2D direction;		// 進行方向
 
 public:
-	Enemy();
-	~Enemy();
+	Enemy2();
+	~Enemy2();
 
 	virtual void Initialize() override;				//初期化処理
 	virtual void Update() override;					//更新処理
@@ -27,7 +27,9 @@ private:
 	//アニメーション制御
 	// void AnimationControl();
 
-	
+
 	// 範囲外のオブジェクトを削除する処理
 	void ScreenDelete();
+
+
 };

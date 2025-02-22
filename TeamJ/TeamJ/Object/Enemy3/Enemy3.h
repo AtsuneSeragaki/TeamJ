@@ -2,16 +2,15 @@
 
 #include "../GameObject.h"
 
-class Enemy : public GameObject
+class Enemy3 : public GameObject
 {
-private:
 	// int animation;				// アニメーション画像
 	// int animation_count;
 	Vector2D direction;		// 進行方向
 
 public:
-	Enemy();
-	~Enemy();
+	Enemy3();
+	~Enemy3();
 
 	virtual void Initialize() override;				//初期化処理
 	virtual void Update() override;					//更新処理
@@ -27,7 +26,7 @@ private:
 	//アニメーション制御
 	// void AnimationControl();
 
-	
+
 	// 範囲外のオブジェクトを削除する処理
 	void ScreenDelete();
 };

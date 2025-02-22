@@ -1,8 +1,9 @@
 #include "GameObject.h"
 #include "DxLib.h"
 
-GameObject::GameObject() : location(0.0f), box_size(0.0f), graphic_images(NULL), flip_flag(FALSE)
+GameObject::GameObject() : location(0.0f), box_size(0.0f), graphic_images(NULL), flip_flag(FALSE), type(RETICLE)
 {
+
 }
 
 GameObject::~GameObject()
