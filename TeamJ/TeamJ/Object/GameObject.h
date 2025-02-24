@@ -19,7 +19,9 @@ protected:
 	Vector2D box_size;   // 当たり判定
 	int graphic_images;  // オブジェクト画像
 	int flip_flag;       // 反転するか？
-	ObjectType type;
+	ObjectType type;	 // オブジェクトの種類の判別
+	bool delete_flg;	// 削除フラグ
+	bool hit_flg;		// 当たり判定フラグ
 
 public:
 	GameObject();
@@ -51,4 +53,20 @@ public:
 	{
 		return box_size;
 	}
+	// オブジェクトのタイプを判別する処理
+	int GetType()
+	{
+		return this->type;
+	}
+	// 削除フラグ
+	bool DeleteFlag()
+	{
+		return this->delete_flg;
+	}
+
+	/// <summary>
+	/// 当たり判定通知処理
+	/// </summary>
+	/// <param name="object">1つ目のゲームオブジェクト</param>
+	virtual void OnHitCollision(GameObject* object);
 };

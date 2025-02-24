@@ -18,8 +18,6 @@ public:
 	virtual void Draw() const override;				//描画処理
 	virtual void Finalize() override;				//終了処理
 
-	//当たり判定通知処理
-	// virtual void OnHitCollision(GameObject* hit_object) override;
 
 private:
 	//移動処理
@@ -31,5 +29,6 @@ private:
 	// 範囲外のオブジェクトを削除する処理
 	void ScreenDelete();
 
-
+	//当たり判定通知処理
+	void OnHitCollision(GameObject* object) override;
 };

@@ -26,7 +26,7 @@ void Enemy::Initialize()
 	direction = Vector2D(1.0f, 0.0f);
 
 	// 進行方向
-	location = Vector2D((0.0f - 25.0f), 240.0f);
+	//location = Vector2D((0.0f - 25.0f), 240.0f);
 }
 /// <summary>
 /// 更新処理
@@ -91,6 +91,15 @@ void Enemy::Movement()
 {
 	// 位置情報に進行方向に加算
 	location += direction;
+}
+
+void Enemy::OnHitCollision(GameObject* object)
+{
+	if (object->GetType() == RETICLE)
+	{
+		// 削除するフラグをtrueにする
+		delete_flg = true;
+	}
 }
 
 /// <summary>

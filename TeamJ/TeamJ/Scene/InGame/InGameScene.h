@@ -2,6 +2,8 @@
 
 #include "../SceneBase.h"
 
+#define D_PIVOT
+
 class InGameScene : public SceneBase
 {
 private:
@@ -28,4 +30,13 @@ public:
 	// 現在のシーン情報を返す
 	virtual eSceneType GetNowSceneType() const override;
 
+private:
+	// 画面外に行ったオブジェクトの削除処理
+	void ScreenOutDelete();
+
+	// 削除処理(ReticleObjectの当たり判定にあたったら削除する)
+	void Delete();
+
+	// 当たり判定チェック処理
+	void HitCheckObject(GameObject* a, GameObject* b);
 };

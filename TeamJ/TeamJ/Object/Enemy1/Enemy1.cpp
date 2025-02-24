@@ -24,7 +24,7 @@ void Enemy1::Initialize()
 	direction = Vector2D(1.5f, 0.0f);
 
 	// is•ûŒü
-	location = Vector2D((0.0f - 25.0f), 300.0f);
+	//location = Vector2D((0.0f - 25.0f), 300.0f);
 }
 
 /// <summary>
@@ -92,4 +92,13 @@ void Enemy1::Movement()
 void Enemy1::ScreenDelete()
 {
 
+}
+
+void Enemy1::OnHitCollision(GameObject* object)
+{
+	if (object->GetType() == RETICLE)
+	{
+		// íœ‚·‚éFlag‚ğTRUE‚É‚·‚é
+		delete_flg = true;
+	}
 }
