@@ -176,6 +176,13 @@
     <ClInclude Include="Utility\UserTemplate.h" />
     <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Images\bar.png" />
+    <Image Include="Resource\Images\bar_inside.png" />
+    <Image Include="Resource\Images\bar_inside1.png" />
+    <Image Include="Resource\Images\bar_inside2.png" />
+    <Image Include="Resource\Images\reticle.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

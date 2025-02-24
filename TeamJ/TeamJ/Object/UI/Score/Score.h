@@ -3,7 +3,15 @@
 class Score
 {
 private:
-	int score; // スコア
+	//int score; // スコア
+
+	int add_score;
+	int subtract_score;
+	int add_flg;
+	int subtract_flg;
+
+public:
+	static int score; // スコア
 
 public:
 	// コンストラクタ
@@ -23,9 +31,9 @@ public:
 
 public:
 	// スコア取得処理
-	int GetScore() { return score; }
+	//int GetScore() { return score; }
 	// スコア加算処理（引数:加算する数）
-	void AddScore(int point) { score += point; }
+	void AddScore(int point) { add_score += point; }
 	// スコア減算処理（引数:減算する数）
-	void SubtractScore(int point) { score -= point; }
+	void SubtractScore(int point) { subtract_score -= point; }
 };

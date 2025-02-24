@@ -50,7 +50,7 @@ bool SceneManager::LoopCheck() const
 
 void SceneManager::ChangeScene(eSceneType new_scene_type)
 {
-	if (new_scene_type == eSceneType::eEnd)
+	if (new_scene_type == eSceneType::eNone)
 	{
 		loop_flag = false;
 		return;

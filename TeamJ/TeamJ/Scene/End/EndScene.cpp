@@ -1,7 +1,7 @@
 #include "EndScene.h"
 
 // コンストラクタ
-EndScene::EndScene()
+EndScene::EndScene():cnt(0)
 {
 }
 
@@ -13,11 +13,23 @@ EndScene::~EndScene()
 // 初期化処理
 void EndScene::Initialize()
 {
+	cnt = 180;
 }
 
 // 更新処理
 eSceneType EndScene::Update()
 {
+	if (cnt > 0)
+	{
+		cnt--;
+	}
+	else
+	{
+		cnt = 0;
+		return eSceneType::eNone;
+	}
+	
+
 	return GetNowSceneType();
 }
 

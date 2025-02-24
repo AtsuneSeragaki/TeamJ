@@ -4,6 +4,8 @@
 
 class EndScene : public SceneBase
 {
+private:
+	int cnt;   // 終了までのカウント
 
 public:
 	// コンストラクタ
