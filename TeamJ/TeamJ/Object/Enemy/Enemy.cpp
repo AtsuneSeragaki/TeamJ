@@ -95,7 +95,7 @@ void Enemy::Movement()
 
 void Enemy::OnHitCollision(GameObject* object)
 {
-	if (object->GetType() == RETICLE)
+	if (object->GetType() == RETICLE && object->HitFlag() == true)
 	{
 		// íœ‚·‚éƒtƒ‰ƒO‚ğtrue‚É‚·‚é
 		delete_flg = true;

@@ -93,7 +93,7 @@ void Enemy3::ScreenDelete()
 // “–‚½‚è”»’è’Ê’mˆ—
 void Enemy3::OnHitCollision(GameObject* object)
 {
-	if (object->GetType() == RETICLE)
+	if (object->GetType() == RETICLE && object->HitFlag() == true)
 	{
 		// íœ‚·‚éFlag‚ğTRUE‚É‚·‚é
 		delete_flg = true;

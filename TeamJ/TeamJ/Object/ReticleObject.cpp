@@ -79,6 +79,7 @@ void ReticleObject::Update()
 	if (input->GetButtonDown(XINPUT_BUTTON_B)&&bullet>0)
 	{
 		push_flg = true;
+		hit_flg = true;
 		bullet--;
 		ejection_cnt++;
 		PlaySoundMem(sound[0], DX_PLAYTYPE_BACK, TRUE);
@@ -91,6 +92,7 @@ void ReticleObject::Update()
 	if (input->GetButtonUp(XINPUT_BUTTON_B))
 	{
 		push_flg = false;
+		hit_flg = false;
 	}
 
 	if (bullet <= 0)

@@ -63,6 +63,11 @@ public:
 	{
 		return this->delete_flg;
 	}
+	//当たり判定フラグ
+	bool HitFlag()
+	{
+		return this->hit_flg;
+	}
 
 	/// <summary>
 	/// 当たり判定通知処理

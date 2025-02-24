@@ -96,7 +96,7 @@ void Enemy1::ScreenDelete()
 
 void Enemy1::OnHitCollision(GameObject* object)
 {
-	if (object->GetType() == RETICLE)
+	if (object->GetType() == RETICLE && object->HitFlag() == true)
 	{
 		// íœ‚·‚éFlag‚ğTRUE‚É‚·‚é
 		delete_flg = true;
