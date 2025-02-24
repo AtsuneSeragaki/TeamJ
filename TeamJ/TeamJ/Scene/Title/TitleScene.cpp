@@ -16,9 +16,9 @@ TitleScene::~TitleScene()
 // 初期化処理
 void TitleScene::Initialize()
 {
-	location2 = Vector2D(320.0f, 200.0f);
-	location3 = Vector2D(320.0f, 300.0f);
-	location4 = Vector2D(320.0f, 400.0f);
+	location2 = Vector2D(320.0f, 260.0f);
+	location3 = Vector2D(320.0f, 340.0f);
+	location4 = Vector2D(320.0f, 420.0f);
 	box2_size = Vector2D(160.0f, 60.0f);
 	box3_size = Vector2D(160.0f, 60.0f);
 	box4_size = Vector2D(160.0f, 60.0f);
@@ -27,6 +27,16 @@ void TitleScene::Initialize()
 
 	push_flg = false;
 	cnt = 0;
+
+	ResourceManager* rm = ResourceManager::GetInstance();
+	std::vector<int>tmp;
+	tmp= rm->GetImages("Resource/Images/Title.png");
+	background_image = tmp[0];
+	int tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/gun_shot.mp3");
+	sound2[0] = tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/cursor_sound.mp3");
+	sound2[1] = tmp2;
 }
 
 // 更新処理
@@ -41,10 +51,12 @@ eSceneType TitleScene::Update()
 			if (menu_num < 2)
 			{
 				menu_num++;
+				PlaySoundMem(sound2[1], DX_PLAYTYPE_BACK, TRUE);
 			}
 			else
 			{
 				menu_num = 0;
+				PlaySoundMem(sound2[1], DX_PLAYTYPE_BACK, TRUE);
 			}
 
 		}
@@ -54,10 +66,12 @@ eSceneType TitleScene::Update()
 			if (menu_num > 0)
 			{
 				menu_num--;
+				PlaySoundMem(sound2[1], DX_PLAYTYPE_BACK, TRUE);
 			}
 			else
 			{
 				menu_num = 2;
+				PlaySoundMem(sound2[1], DX_PLAYTYPE_BACK, TRUE);
 			}
 
 		}
@@ -73,6 +87,7 @@ eSceneType TitleScene::Update()
 	}
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
+		PlaySoundMem(sound2[0], DX_PLAYTYPE_BACK, TRUE);
 		if (menu_num == 0)
 		{
 			return eSceneType::eInGame;
@@ -94,6 +109,8 @@ eSceneType TitleScene::Update()
 // 描画処理
 void TitleScene::Draw() const
 {
+	DrawGraph(-223, 0, background_image, FALSE);
+
 	SetFontSize(20);
 	DrawString(10, 10, "TITLE", 0xffffff);
 
@@ -121,6 +138,8 @@ void TitleScene::Draw() const
 		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);
 		SetDrawBright(255, 255, 255);
 	}
+
+
 }
 
 // 終了時処理

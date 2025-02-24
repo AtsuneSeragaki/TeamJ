@@ -18,6 +18,8 @@ private:
 	bool push_flg;
 	int cnt;
 
+	int sound2[6];
+
 public:
 	// コンストラクタ
 	TitleScene();

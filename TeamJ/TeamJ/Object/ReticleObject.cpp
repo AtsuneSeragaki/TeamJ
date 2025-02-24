@@ -27,17 +27,17 @@ void ReticleObject::Initialize()
 	img = tmp[0];
 
 	int tmp2;
-	tmp2 = rm->GetSounds("Resource/Sounds/Œe‚ðŒ‚‚Â.mp3");
+	tmp2 = rm->GetSounds("Resource/Sounds/gun_shot.mp3");
 	sound[0] = tmp2;
-	tmp2=rm->GetSounds("Resource/Sounds/”rä°.mp3");
+	tmp2 = rm->GetSounds("Resource/Sounds/ejection.mp3");
 	sound[1] = tmp2;
-	tmp2 = rm->GetSounds("Resource/Sounds/Œe‚Ì’eØ‚ê.mp3");
+	tmp2 = rm->GetSounds("Resource/Sounds/out_of_bullets.mp3");
 	sound[2] = tmp2;
-	tmp2 = rm->GetSounds("Resource/Sounds/’e‘q‚ðŠO‚·.mp3");
+	tmp2 = rm->GetSounds("Resource/Sounds/reload.mp3");
 	sound[3] = tmp2;
-	tmp2 = rm->GetSounds("Resource/Sounds/’e‘q‚ðƒZƒbƒg.mp3");
+	tmp2 = rm->GetSounds("Resource/Sounds/reload2.mp3");
 	sound[4] = tmp2;
-	tmp2 = rm->GetSounds("Resource/Sounds/Œe‚ÌƒXƒ‰ƒCƒh‚ðˆø‚­.mp3"); 
+	tmp2 = rm->GetSounds("Resource/Sounds/gun_slide.mp3");
 	sound[5] = tmp2;
 }
 
