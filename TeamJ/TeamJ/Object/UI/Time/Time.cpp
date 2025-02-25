@@ -40,10 +40,10 @@ void Time::Update()
 	//cnt -= 10;
 
 	// カウントが0になったらリセット
-	if (cnt <= 0)
+	/*if (cnt <= 0)
 	{
 		cnt = 3600;
-	}
+	}*/
 }
 
 void Time::Draw() const

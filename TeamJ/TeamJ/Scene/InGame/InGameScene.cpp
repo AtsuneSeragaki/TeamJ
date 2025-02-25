@@ -4,6 +4,9 @@
 #include "../../Object/Enemy1/Enemy1.h"
 #include "../../Object/Enemy2/Enemy2.h"
 #include "../../Object/Enemy3/Enemy3.h"
+#include "../../Object/UI/Score/Score.h"
+#include "../../Object/UI/Time/Time.h"
+
 
 // デバック用 一旦書き込んだだけ
 #include "../../Utility/InputManager.h"
@@ -13,12 +16,15 @@
 // コンストラクタ
 InGameScene::InGameScene() : enemy_num(0)
 {
-	CreateObject<ReticleObject>(Vector2D(0.0f, 0.0f));
+	reticle = CreateObject<ReticleObject>(Vector2D(0.0f, 0.0f));
 	/*デバック用*/
 	//CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
 	//CreateObject<Enemy1>(Vector2D((0.0f - 25.0f), 300.0f));
 	//CreateObject<Enemy2>(Vector2D((0.0f - 25.0f), 360.0f));
 	//CreateObject<Enemy3>(Vector2D((0.0f - 25.0f), 420.0f));
+
+	time = new Time();
+	score = new Score();
 }
 
 // デストラクタ
@@ -29,12 +35,21 @@ InGameScene::~InGameScene()
 // 初期化処理
 void InGameScene::Initialize()
 {
-
+	score->Initialize();
+	time->Initialize();
 }
 
 // 更新処理
 eSceneType InGameScene::Update()
 {
+	score->Update();
+	time->Update();
+
+	if (time->GetCount() <= 0)
+	{
+		return eSceneType::eResult;
+	}
+
 	for (GameObject* obj : objects)
 	{
 		obj->Update();
@@ -64,10 +79,29 @@ eSceneType InGameScene::Update()
 // 描画処理
 void InGameScene::Draw() const
 {
+	DrawBox(0, 0, 700, 700, 0x786458, TRUE);
+
+	time->Draw();
+	score->Draw();
+
+	for (int i = 0; i < 3; i++)
+	{
+		DrawBox(0, 90 + i * 110, 700, 125 + i * 110, 0x855a42, TRUE);
+		DrawBox(0, 125 + i * 110, 700, 140 + i * 110, 0x7a564a, TRUE);
+	}
+	
 	for (GameObject* obj : objects)
 	{
+		if (obj->GetType() == RETICLE)
+		{
+			continue;
+		}
+
 		obj->Draw();
 	}
+
+	reticle->Draw();
+
 }
 
 // 終了時処理

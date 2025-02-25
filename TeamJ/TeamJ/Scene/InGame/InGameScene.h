@@ -15,6 +15,9 @@ class InGameScene : public SceneBase
 private:
 
 	int enemy_num;
+	class ReticleObject* reticle;
+	class Time* time;
+	class Score* score;
 
 public:
 	// コンストラクタ

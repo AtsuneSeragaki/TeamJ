@@ -32,4 +32,8 @@ public:
 	// 終了時処理
 	void FInalize();
 
+public:
+	// 時間を取得
+	int GetCount() { return cnt; }
+
 };
