@@ -1,7 +1,8 @@
 #include "Enemy.h"
 #include "DxLib.h"
+#include "../../Utility/ResourceManager.h"
 
-Enemy::Enemy()
+Enemy::Enemy() : image(0)
 {
 
 }
@@ -27,6 +28,10 @@ void Enemy::Initialize()
 
 	// 進行方向
 	//location = Vector2D((0.0f - 25.0f), 240.0f);
+	ResourceManager* rm = ResourceManager::GetInstance();
+	std::vector<int>tmp;
+	tmp = rm->GetImages("Resource/Images/瓶1.png");
+	image = tmp[0];
 }
 /// <summary>
 /// 更新処理
@@ -67,8 +72,8 @@ void Enemy::Draw() const
 	// 白い四角を描画する(デバック用)
 	Vector2D t1 = location - (box_size / 2.0f);
 	Vector2D br = location + (box_size / 2.0f);
-	DrawBoxAA(t1.x, t1.y, br.x, br.y, GetColor(255, 255, 255), TRUE);
-
+	//DrawBoxAA(t1.x, t1.y, br.x, br.y, GetColor(255, 255, 255), TRUE);
+	DrawRotaGraphF(location.x, location.y, 0.05f, 0.0f, image, TRUE, FALSE);
 	// 白い四角の現在の位置情報(デバック)
 	DrawFormatString(20, 100, 0xffffff, "EnmeyのX座標 %f Y座標 %f", t1.x, br.y, TRUE);
 
