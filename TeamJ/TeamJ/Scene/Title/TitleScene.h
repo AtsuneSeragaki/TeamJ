@@ -18,7 +18,12 @@ private:
 	bool push_flg;
 	int cnt;
 
+	int image[2];
+
 	int sound2[6];
+
+	int font_scene_name;
+	int font_button;
 
 public:
 	// コンストラクタ

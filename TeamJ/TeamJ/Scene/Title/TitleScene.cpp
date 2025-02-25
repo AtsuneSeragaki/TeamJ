@@ -32,11 +32,19 @@ void TitleScene::Initialize()
 	std::vector<int>tmp;
 	tmp= rm->GetImages("Resource/Images/Title.png");
 	background_image = tmp[0];
+	tmp = rm->GetImages("Resource/Images/buttonLong_brown.png");
+	image[0] = tmp[0];
+	tmp = rm->GetImages("Resource/Images/buttonLong_beige.png");
+	image[1] = tmp[0];
+
 	int tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/gun_shot.mp3");
 	sound2[0] = tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/cursor_sound.mp3");
 	sound2[1] = tmp2;
+
+	font_scene_name = CreateFontToHandle("Fortuner Heavy", 60, -1, DX_FONTTYPE_ANTIALIASING);
+	font_button = CreateFontToHandle("Fortuner Heavy", 40, -1, DX_FONTTYPE_ANTIALIASING);
 }
 
 // 更新処理
@@ -111,34 +119,50 @@ void TitleScene::Draw() const
 {
 	DrawGraph(-223, 0, background_image, FALSE);
 
+	//DrawStringToHandle(200, 25, "RESULT", 0xffffff, font_scene_name);
+	
+
 	SetFontSize(20);
 	DrawString(10, 10, "TITLE", 0xffffff);
 
 	if (menu_num == 0)
 	{
-		SetDrawBright(128, 128, 128);
+		/*SetDrawBright(128, 128, 128);
 		DrawBoxAA(location2.x - box2_size.x * 0.5f, location2.y - box2_size.y * 0.5f, location2.x + box2_size.x * 0.5f, location2.y + box2_size.y * 0.5f, 0xffffff, TRUE);
 		SetDrawBright(255, 255, 255);
 		DrawBoxAA(location3.x - box3_size.x * 0.5f, location3.y - box3_size.y * 0.5f, location3.x + box3_size.x * 0.5f, location3.y + box3_size.y * 0.5f, 0xffffff, TRUE);
-		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);
+		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);*/
+		DrawRotaGraphF(location2.x, location2.y, 1.0f, 0.0f, image[1], TRUE, FALSE);
+		DrawStringToHandle(location2.x - 55, location2.y - 25, "START", 0x000000, font_button);
+		DrawRotaGraphF(location3.x, location3.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawStringToHandle(location3.x - 77, location3.y - 25, "RANKING", 0xffffff, font_button);
+		DrawRotaGraphF(location4.x, location4.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawStringToHandle(location4.x - 33, location4.y - 25, "END", 0xffffff, font_button);
 	}
 	else if (menu_num == 1)
 	{
-		DrawBoxAA(location2.x - box2_size.x * 0.5f, location2.y - box2_size.y * 0.5f, location2.x + box2_size.x * 0.5f, location2.y + box2_size.y * 0.5f, 0xffffff, TRUE);
+		/*DrawBoxAA(location2.x - box2_size.x * 0.5f, location2.y - box2_size.y * 0.5f, location2.x + box2_size.x * 0.5f, location2.y + box2_size.y * 0.5f, 0xffffff, TRUE);
 		SetDrawBright(128, 128, 128);
 		DrawBoxAA(location3.x - box3_size.x * 0.5f, location3.y - box3_size.y * 0.5f, location3.x + box3_size.x * 0.5f, location3.y + box3_size.y * 0.5f, 0xffffff, TRUE);
 		SetDrawBright(255, 255, 255);
-		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);
+		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);*/
+		DrawRotaGraphF(location2.x, location2.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawRotaGraphF(location3.x, location3.y, 1.0f, 0.0f, image[1], TRUE, FALSE);
+		DrawRotaGraphF(location4.x, location4.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
 	}
 	else
 	{
-		DrawBoxAA(location2.x - box2_size.x * 0.5f, location2.y - box2_size.y * 0.5f, location2.x + box2_size.x * 0.5f, location2.y + box2_size.y * 0.5f, 0xffffff, TRUE);
+		/*DrawBoxAA(location2.x - box2_size.x * 0.5f, location2.y - box2_size.y * 0.5f, location2.x + box2_size.x * 0.5f, location2.y + box2_size.y * 0.5f, 0xffffff, TRUE);
 		DrawBoxAA(location3.x - box3_size.x * 0.5f, location3.y - box3_size.y * 0.5f, location3.x + box3_size.x * 0.5f, location3.y + box3_size.y * 0.5f, 0xffffff, TRUE);
 		SetDrawBright(128, 128, 128);
 		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);
-		SetDrawBright(255, 255, 255);
+		SetDrawBright(255, 255, 255);*/
+		DrawRotaGraphF(location2.x, location2.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawRotaGraphF(location3.x, location3.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawRotaGraphF(location4.x, location4.y, 1.0f, 0.0f, image[1], TRUE, FALSE);
 	}
 
+	
 
 }
 
