@@ -26,6 +26,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 	// ウィンドウズPCに一時的にフォントデータを読み込む(システム終了まで)
 	// NOTE: .ttf→フォントデータ（トゥルータイプフォントの略）
 	AddFontResourceExA("Resource/Font/FortunerHeavyPersonalUse.otf", FR_PRIVATE, NULL);
+	AddFontResourceExA("Resource/Font/Reloaded.ttf", FR_PRIVATE, NULL);
+
 
 	SetDrawScreen(DX_SCREEN_BACK);
 

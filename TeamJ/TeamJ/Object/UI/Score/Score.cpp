@@ -1,7 +1,7 @@
 #include "Score.h"
 #include "DxLib.h"
 
-int Score::score = 0;
+int Score::score = 5000;
 
 Score::Score() : /*score(0),*/add_score(0),subtract_score(0),add_flg(false),subtract_flg(false)
 {
