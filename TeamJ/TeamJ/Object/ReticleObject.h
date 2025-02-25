@@ -14,6 +14,8 @@ private:
 	int sound[6];
 	int ejection_cnt;
 
+	int font_bullet;
+
 public:
 	// ‰Šú‰»ˆ—
 	void Initialize() override;

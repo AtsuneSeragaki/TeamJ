@@ -13,7 +13,7 @@ void ReticleObject::Initialize()
 	/******************************************************/
 	location = Vector2D(320.0f, 240.0f);
 	box_size = Vector2D(40.0f, 40.0f);
-	box2_size = Vector2D(300.0f, 60.0f);
+	box2_size = Vector2D(60.0f, 60.0f);
 	push_flg = false;
 	bullet = BULLET_MAX_NUN;
 	ejection_cnt = 0;
@@ -39,6 +39,8 @@ void ReticleObject::Initialize()
 	sound[4] = tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/gun_slide.mp3");
 	sound[5] = tmp2;
+
+	font_bullet = CreateFontToHandle("Stencil", 20, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 }
 
 void ReticleObject::Update()
@@ -126,13 +128,11 @@ void ReticleObject::Draw() const
 	DrawString(0, 0, "a", 0xffffff);
 	DrawFormatString(0, 30, 0xffffff, "%f %f", location.x, location.y);
 
-	DrawFormatString(0, 50, 0xffffff, "%d", bullet);
-
 	DrawRotaGraphF(location.x, location.y, 1.0f, 0.0f, img[0], TRUE, FALSE);
 
-	DrawBoxAA(location.x - box2_size.x * 0.5f, location.y + 180 - box2_size.y * 0.5f, location.x + box2_size.x * 0.5f, location.y + 180 + box2_size.y * 0.5f, 0xffffff, TRUE);
-	DrawRotaGraph2F(location.x, location.y, 565/2, 565/2, 1.0f, PI/180*90, 0.0f, img[1], TRUE, FALSE);
-
+	DrawBoxAA(580 - box2_size.x * 0.5f, 420 - box2_size.y * 0.5f, 580 + box2_size.x * 0.5f, 420 + box2_size.y * 0.5f, 0xffffff, TRUE);
+	DrawRotaGraphF(560, 420, 0.1f, PI / 180 * 90, img[1], TRUE, FALSE);
+	DrawFormatStringToHandle(575, 420, 0x000000, font_bullet, "Å~%d", bullet);
 }
 
 void ReticleObject::Finalize()
