@@ -3,15 +3,18 @@
 #include "../SceneBase.h"
 
 // ifdef用
-#define D_PIVOT		// HitCeckObjectで使用
-#define D_SPAWN		// SpawnEnemyで使用
+#define D_PIVOT						// HitCeckObjectで使用
+#define D_SPAWN						// SpawnEnemyで使用
+
+// マクロ定義
+#define D_MAX_SPAWN		(10)			// テキスポーンの最大数(デバック用)
 
 
 class InGameScene : public SceneBase
 {
 private:
 
-
+	int enemy_num;
 
 public:
 	// コンストラクタ

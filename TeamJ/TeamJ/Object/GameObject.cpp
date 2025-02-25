@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "DxLib.h"
 
-GameObject::GameObject() : location(0.0f), box_size(0.0f), graphic_images(NULL), flip_flag(FALSE), type(RETICLE), delete_flg(false), hit_flg(false)
+GameObject::GameObject() : location(0.0f), box_size(0.0f), graphic_images(NULL), flip_flag(FALSE), type(RETICLE), delete_flg(false), hit_flg(false), is_break(false)
 {
 
 }
@@ -42,3 +42,4 @@ void GameObject::OnHitCollision(GameObject* object)
 {
 	// 当たったときに行う処理をGameObjectを継承したクラスのこの関数【OnHitCollision(GameObject* object)】に書く
 }
+

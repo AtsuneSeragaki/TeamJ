@@ -23,6 +23,8 @@ protected:
 	bool delete_flg;	// 削除フラグ
 	bool hit_flg;		// 当たり判定フラグ
 
+	bool is_break;
+
 public:
 	GameObject();
 	virtual ~GameObject();
@@ -68,10 +70,15 @@ public:
 	{
 		return this->hit_flg;
 	}
-
+	// オブジェクトが破壊されたかどうか
+	bool IsBreak()
+	{
+		return this->is_break;
+	}
 	/// <summary>
 	/// 当たり判定通知処理
 	/// </summary>
 	/// <param name="object">1つ目のゲームオブジェクト</param>
 	virtual void OnHitCollision(GameObject* object);
+
 };

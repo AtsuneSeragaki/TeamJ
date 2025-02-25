@@ -11,7 +11,7 @@
 
 
 // コンストラクタ
-InGameScene::InGameScene()
+InGameScene::InGameScene() : enemy_num(0)
 {
 	CreateObject<ReticleObject>(Vector2D(0.0f, 0.0f));
 	/*デバック用*/
@@ -29,7 +29,7 @@ InGameScene::~InGameScene()
 // 初期化処理
 void InGameScene::Initialize()
 {
-	
+
 }
 
 // 更新処理
@@ -58,7 +58,7 @@ eSceneType InGameScene::Update()
 	// 範囲外オブジェクト削除処理
 	ScreenOutDelete();
 
-	return GetNowSceneType();	
+	return GetNowSceneType();
 }
 
 // 描画処理
@@ -87,94 +87,96 @@ void InGameScene::SpawnEnemy()
 #ifdef D_SPAWN		// if( ifdef == D_SPAWN )		defineはヘッダーにある
 	int rd;						//乱数を取得する変数
 	int e_spawn;				// 敵出現スイッチ
-	int count = 0;
-	
+
 	e_spawn = GetRand(2);		// 0～2までのランダムな数字を取得する
-	rd = rand() % 100;			// 25までのランダムな数字を出す
+	rd = GetRand(4);			// 100までのランダムな数字を出す
 
-	// フラグを作成する
-	// 敵生成カウント
-	if (count > 200)
+	if (enemy_num < D_MAX_SPAWN)
 	{
-		count = 0;
-	}
-	else
-	{
-
-
-		if (rd <= 3)
+		if (rd == 3)
 		{
 			switch (e_spawn)
 			{
-				// 一番上の段
+				// 一番上の段 一レーンに的野和生成する
 			case 0:
 				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
 				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 			case 2:
 				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 			}
 		}
-		if (rd <= 2)
+		if (rd == 2)
 		{
 			switch (e_spawn)
 			{
 				// 一番上の段
 			case 0:
 				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
 				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 一番下の段
 			case 2:
 				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 			}
 
 		}
-		if (rd <= 1)
+		if (rd == 1)
 		{
 			switch (e_spawn)
 			{
 				// 一番上の段
 			case 0:
 				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
 				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 一番下の段
 			case 2:
 				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 			}
 		}
-		if (rd <= 0)
+		if (rd == 0)
 		{
 			switch (e_spawn)
 			{
 				// 一番上の段
 			case 0:
 				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
 				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 				// 一番下の段
 			case 2:
 				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				enemy_num++;
 				break;
 			}
 		}
-		count++;
 	}
 
 #else
@@ -184,28 +186,33 @@ void InGameScene::SpawnEnemy()
 		int a;
 		a = GetRand(2);
 		//CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
-
-		switch (a)
+		if (enemy_num < D_MAX_SPAWN)
 		{
-		case 0:
-			CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
-			break;
-		case 1:
-			CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
-			break;
-		case 2:
-			CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
-			break;
-			//case 3:
-			//	CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
-			break;
-		default:
-			break;
+			switch (a)
+			{
+			case 0:
+				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+				enemy_num++;
+				break;
+			case 1:
+				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+				enemy_num++;
+				break;
+			case 2:
+				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+				enemy_num++;
+				break;
+				//case 3:
+				//	CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+				break;
+			default:
+				break;
+			}
 
 		}
 
 	}
-
+	DrawFormatString(320, 340, 0xffffff, "%d", enemy_num, TRUE);
 #endif // D_SPAWN
 }
 
@@ -216,10 +223,11 @@ void InGameScene::ScreenOutDelete()
 	{
 		// 画面外に行ったら削除する
 		/*画面の右側の上限の値 900.0f	画面の左側の上限の値 - 400.0f*/
-		if (objects[i]->GetLocation().x >= 900.0f || objects[i]->GetLocation().x < -400.0f)
+		if (objects[i]->GetLocation().x >= 800.0f || objects[i]->GetLocation().x < -400.0f)
 		{
 			objects.erase(objects.begin() + i);
-		}		
+			enemy_num--;
+		}
 	}
 }
 
@@ -230,7 +238,11 @@ void InGameScene::Delete()
 		//(削除のフラグがtrueのとき)
 		if (objects[i]->DeleteFlag() == true)
 		{
-			objects.erase(objects.begin() + i);
+			if (objects[i]->IsBreak() == true)
+			{
+				objects.erase(objects.begin() + i);
+				enemy_num--;
+			}
 		}
 	}
 }
@@ -252,8 +264,8 @@ void InGameScene::HitCheckObject(GameObject* a, GameObject* b)
 	//距離より大きさが大きい場合、Hit判定とする
 	if ((fabsf(diff.x) < box_size.x) && (fabsf(diff.y) < box_size.y))
 	{
-			a->OnHitCollision(b);
-			b->OnHitCollision(a);
+		a->OnHitCollision(b);
+		b->OnHitCollision(a);
 	}
 }
 #else

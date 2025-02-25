@@ -99,6 +99,7 @@ void Enemy::OnHitCollision(GameObject* object)
 	{
 		// íœ‚·‚éƒtƒ‰ƒO‚ğtrue‚É‚·‚é
 		delete_flg = true;
+		is_break = true;
 	}
 }
 
