@@ -1,14 +1,15 @@
 #pragma once
 
 #include "../SceneBase.h"
+#define RANKING_DATA (5)
 
 class RankingScene : public SceneBase
 {
 private:
-	int score[6];       //スコアデータ
-	int rank[6];        //ランクデータ
-	char name[6][15];   //名前データ
-	char handlename[5];   //名前データ(仮)
+	int score[RANKING_DATA];       //スコアデータ
+	int rank[RANKING_DATA];        //ランクデータ
+	int sound2[6];				   //効果音
+
 
 public:
 	// コンストラクタ
@@ -29,6 +30,9 @@ public:
 private:
 	//データ入れ替え処理
 	void SortData();
+
+	//ランキングの入れ替え
+	void SetRank(int score);
 
 public:
 	// 現在のシーン情報を返す
