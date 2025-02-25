@@ -9,6 +9,10 @@ private:
 	int score[RANKING_DATA];       //スコアデータ
 	int rank[RANKING_DATA];        //ランクデータ
 	int sound2[6];				   //効果音
+	int button_image;			   //ボタンの画像
+	int font_scene_name;		   //シーンのフォントサイズ
+	int font_button;			   //ボタンのフォントサイズ
+	int font_score;			       //スコアのフォントサイズ
 
 
 public:

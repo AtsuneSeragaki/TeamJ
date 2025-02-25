@@ -4,7 +4,7 @@
 #include "../../Utility/ResourceManager.h"
 
 // コンストラクタ
-RankingScene::RankingScene():score{},rank{}
+RankingScene::RankingScene() :score{}, rank{}, sound2{},button_image(), font_button(), font_scene_name(), font_score()
 {
 }
 
@@ -16,16 +16,26 @@ RankingScene::~RankingScene()
 // 初期化処理
 void RankingScene::Initialize()
 {
-    //音源の読み込み
+    //画像のの読み込み
     ResourceManager* rm = ResourceManager::GetInstance();
     std::vector<int>tmp;
-    tmp = rm->GetImages("Resource/Images/Title.png");
+    tmp = rm->GetImages("Resource/Images/ranking.png");
     background_image = tmp[0];
+    tmp = rm->GetImages("Resource/Images/buttonLong_brown.png");
+    button_image = tmp[0];
+    tmp = rm->GetImages("Resource/Images/buttonLong_beige.png");
+    button_image = tmp[0];
+    //音源の読込み
     int tmp2;
     tmp2 = rm->GetSounds("Resource/Sounds/gun_shot.mp3");
     sound2[0] = tmp2;
     tmp2 = rm->GetSounds("Resource/Sounds/cursor_sound.mp3");
     sound2[1] = tmp2;
+
+    //フォントの読み込み
+    font_scene_name = CreateFontToHandle("Stencil", 65, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+    font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+    font_score = CreateFontToHandle("Stencil", 85, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	
     // ランキングデータの読み込み
     FILE* fp = nullptr;
@@ -53,6 +63,7 @@ void RankingScene::Initialize()
 // 更新処理
 eSceneType RankingScene::Update()
 {
+    //Bボタンを押したらタイトルに戻るようにする
     InputManager* input = InputManager::GetInstance();
     if (input->GetButtonDown(XINPUT_BUTTON_B))
     {
@@ -67,15 +78,21 @@ eSceneType RankingScene::Update()
 // 描画処理
 void RankingScene::Draw() const
 {
-	SetFontSize(20);
-	DrawString(10, 10, "RANKING", 0xffffff);
-    DrawString(10, 30, "A:Title", 0xffffff);
+    //背景画像の描画
+    DrawExtendGraph(-25, -50, 665, 530, background_image, FALSE);
 
-    SetFontSize(40);
-	for (int i = 0; i < RANKING_DATA; ++i)
+    //真ん中にRANKINGの文字を描画
+    DrawStringToHandle(180, 20, "RANKING", 0x000000, font_scene_name);
+
+    //順位の描画
+    for (int i = 0; i < RANKING_DATA - 2; ++i)
 	{
-        DrawFormatString(150, 100 + i * 60, GetColor(255, 255, 255), "No.%d  %d", i + 1, score[i]);
+        DrawFormatStringToHandle(80, 105 + i * 85, GetColor(0, 0, 0), font_score, "No.%d  %05d", i + 1, score[i]);
 	}
+
+    //タイトルに戻るボタンの描画
+    DrawRotaGraphF(330, 410, 1.0f, 0.0f, button_image, TRUE, FALSE);
+    DrawStringToHandle(275, 385, "TITLE", 0x000000, font_button);
 }
 
 // 終了時処理
@@ -86,6 +103,7 @@ void RankingScene::Finalize()
 
 void RankingScene::SortData()
 {
+    
     for (int i = 0; i < RANKING_DATA - 1; i++)
     {
         for (int j = i + 1; j < RANKING_DATA; j++)
@@ -139,6 +157,7 @@ void RankingScene::SortData()
 
 void RankingScene::SetRank(int score)
 {
+    //5位から順位を設定する
     if (this->score[5] < score)
     {
         if (this->score[4] != score && this->score[3] != score && this->score[2] != score && this->score[1] != score && this->score[0] != score)
