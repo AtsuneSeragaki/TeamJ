@@ -43,8 +43,8 @@ void TitleScene::Initialize()
 	tmp2 = rm->GetSounds("Resource/Sounds/cursor_sound.mp3");
 	sound2[1] = tmp2;
 
-	font_scene_name = CreateFontToHandle("Fortuner Heavy", 60, -1, DX_FONTTYPE_ANTIALIASING);
-	font_button = CreateFontToHandle("Fortuner Heavy", 40, -1, DX_FONTTYPE_ANTIALIASING);
+	font_scene_name = CreateFontToHandle("Stencil", 60, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 }
 
 // 更新処理
@@ -133,11 +133,11 @@ void TitleScene::Draw() const
 		DrawBoxAA(location3.x - box3_size.x * 0.5f, location3.y - box3_size.y * 0.5f, location3.x + box3_size.x * 0.5f, location3.y + box3_size.y * 0.5f, 0xffffff, TRUE);
 		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);*/
 		DrawRotaGraphF(location2.x, location2.y, 1.0f, 0.0f, image[1], TRUE, FALSE);
-		DrawStringToHandle(location2.x - 55, location2.y - 25, "START", 0x000000, font_button);
+		DrawStringToHandle(location2.x - 60, location2.y - 25, "START", 0x000000, font_button);
 		DrawRotaGraphF(location3.x, location3.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
-		DrawStringToHandle(location3.x - 77, location3.y - 25, "RANKING", 0xffffff, font_button);
+		DrawStringToHandle(location3.x - 87, location3.y - 25, "RANKING", 0xffffff, font_button);
 		DrawRotaGraphF(location4.x, location4.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
-		DrawStringToHandle(location4.x - 33, location4.y - 25, "END", 0xffffff, font_button);
+		DrawStringToHandle(location4.x - 37, location4.y - 25, "END", 0xffffff, font_button);
 	}
 	else if (menu_num == 1)
 	{
@@ -147,8 +147,11 @@ void TitleScene::Draw() const
 		SetDrawBright(255, 255, 255);
 		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);*/
 		DrawRotaGraphF(location2.x, location2.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawStringToHandle(location2.x - 60, location2.y - 25, "START", 0xffffff, font_button);
 		DrawRotaGraphF(location3.x, location3.y, 1.0f, 0.0f, image[1], TRUE, FALSE);
+		DrawStringToHandle(location3.x - 87, location3.y - 25, "RANKING", 0x000000, font_button);
 		DrawRotaGraphF(location4.x, location4.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawStringToHandle(location4.x - 37, location4.y - 25, "END", 0xffffff, font_button);
 	}
 	else
 	{
@@ -158,8 +161,11 @@ void TitleScene::Draw() const
 		DrawBoxAA(location4.x - box4_size.x * 0.5f, location4.y - box4_size.y * 0.5f, location4.x + box4_size.x * 0.5f, location4.y + box4_size.y * 0.5f, 0xffffff, TRUE);
 		SetDrawBright(255, 255, 255);*/
 		DrawRotaGraphF(location2.x, location2.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawStringToHandle(location2.x - 60, location2.y - 25, "START", 0xffffff, font_button);
 		DrawRotaGraphF(location3.x, location3.y, 1.0f, 0.0f, image[0], TRUE, FALSE);
+		DrawStringToHandle(location3.x - 87, location3.y - 25, "RANKING", 0xffffff, font_button);
 		DrawRotaGraphF(location4.x, location4.y, 1.0f, 0.0f, image[1], TRUE, FALSE);
+		DrawStringToHandle(location4.x - 37, location4.y - 25, "END", 0x000000, font_button);
 	}
 
 	

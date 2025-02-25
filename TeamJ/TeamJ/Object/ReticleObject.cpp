@@ -3,6 +3,8 @@
 #include "../Utility/InputManager.h"
 #include "../Utility/ResourceManager.h"
 
+#define PI    3.1415926535897932384626433832795f
+
 void ReticleObject::Initialize()
 {
 	/******************************************************/
@@ -10,21 +12,19 @@ void ReticleObject::Initialize()
 	type = RETICLE;
 	/******************************************************/
 	location = Vector2D(320.0f, 240.0f);
-
 	box_size = Vector2D(40.0f, 40.0f);
-
+	box2_size = Vector2D(300.0f, 60.0f);
 	push_flg = false;
-
 	bullet = BULLET_MAX_NUN;
-
 	ejection_cnt = 0;
-
 	reload_cnt = 0;
 
 	ResourceManager* rm = ResourceManager::GetInstance();
 	std::vector<int>tmp;
 	tmp = rm->GetImages("Resource/Images/reticle.png");
-	img = tmp[0];
+	img[0] = tmp[0];
+	tmp = rm->GetImages("Resource/Images/bullet.png");
+	img[1] = tmp[0];
 
 	int tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/gun_shot.mp3");
@@ -128,7 +128,11 @@ void ReticleObject::Draw() const
 
 	DrawFormatString(0, 50, 0xffffff, "%d", bullet);
 
-	DrawRotaGraphF(location.x, location.y,1.0f,0.0f, img, TRUE,FALSE);
+	DrawRotaGraphF(location.x, location.y, 1.0f, 0.0f, img[0], TRUE, FALSE);
+
+	DrawBoxAA(location.x - box2_size.x * 0.5f, location.y + 180 - box2_size.y * 0.5f, location.x + box2_size.x * 0.5f, location.y + 180 + box2_size.y * 0.5f, 0xffffff, TRUE);
+	DrawRotaGraph2F(location.x, location.y, 565/2, 565/2, 1.0f, PI/180*90, 0.0f, img[1], TRUE, FALSE);
+
 }
 
 void ReticleObject::Finalize()

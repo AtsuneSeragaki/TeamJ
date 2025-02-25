@@ -6,10 +6,11 @@ class ReticleObject:public GameObject
 {
 private:
 
+	Vector2D box2_size;
 	bool push_flg;
 	int bullet;
 	int reload_cnt;
-	int img;
+	int img[2];
 	int sound[6];
 	int ejection_cnt;
 

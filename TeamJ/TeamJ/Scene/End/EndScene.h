@@ -5,7 +5,15 @@
 class EndScene : public SceneBase
 {
 private:
+	Vector2D location;
+
 	int cnt;   // 終了までのカウント
+	int bgm;
+	int image;
+	int sound;
+	int font_button;
+
+	bool push_flg;
 
 public:
 	// コンストラクタ
