@@ -5,16 +5,20 @@
 #include "../../Object/Enemy2/Enemy2.h"
 #include "../../Object/Enemy3/Enemy3.h"
 
+// デバック用 一旦書き込んだだけ
+#include "../../Utility/InputManager.h"
+#include "DxLib.h"
+
 
 // コンストラクタ
 InGameScene::InGameScene()
 {
 	CreateObject<ReticleObject>(Vector2D(0.0f, 0.0f));
 	/*デバック用*/
-	CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
-	CreateObject<Enemy1>(Vector2D((0.0f - 25.0f), 300.0f));
-	CreateObject<Enemy2>(Vector2D((0.0f - 25.0f), 360.0f));
-	CreateObject<Enemy3>(Vector2D((0.0f - 25.0f), 420.0f));
+	//CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
+	//CreateObject<Enemy1>(Vector2D((0.0f - 25.0f), 300.0f));
+	//CreateObject<Enemy2>(Vector2D((0.0f - 25.0f), 360.0f));
+	//CreateObject<Enemy3>(Vector2D((0.0f - 25.0f), 420.0f));
 }
 
 // デストラクタ
@@ -45,6 +49,9 @@ eSceneType InGameScene::Update()
 		}
 	}
 
+	// 敵生成処理
+	SpawnEnemy();
+
 	// オブジェクト削除処理
 	Delete();
 
@@ -72,6 +79,134 @@ void InGameScene::Finalize()
 eSceneType InGameScene::GetNowSceneType() const
 {
 	return eSceneType::eInGame;
+}
+
+// 敵生成処理
+void InGameScene::SpawnEnemy()
+{
+#ifdef D_SPAWN		// if( ifdef == D_SPAWN )		defineはヘッダーにある
+	int rd;						//乱数を取得する変数
+	int e_spawn;				// 敵出現スイッチ
+	int count = 0;
+	
+	e_spawn = GetRand(2);		// 0～2までのランダムな数字を取得する
+	rd = rand() % 100;			// 25までのランダムな数字を出す
+
+	// フラグを作成する
+	// 敵生成カウント
+	if (count > 200)
+	{
+		count = 0;
+	}
+	else
+	{
+
+
+		if (rd <= 3)
+		{
+			switch (e_spawn)
+			{
+				// 一番上の段
+			case 0:
+				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 真ん中の段
+			case 1:
+				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+			case 2:
+				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+			}
+		}
+		if (rd <= 2)
+		{
+			switch (e_spawn)
+			{
+				// 一番上の段
+			case 0:
+				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 真ん中の段
+			case 1:
+				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 一番下の段
+			case 2:
+				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+			}
+
+		}
+		if (rd <= 1)
+		{
+			switch (e_spawn)
+			{
+				// 一番上の段
+			case 0:
+				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 真ん中の段
+			case 1:
+				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 一番下の段
+			case 2:
+				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+			}
+		}
+		if (rd <= 0)
+		{
+			switch (e_spawn)
+			{
+				// 一番上の段
+			case 0:
+				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 真ん中の段
+			case 1:
+				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+				// 一番下の段
+			case 2:
+				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				break;
+			}
+		}
+		count++;
+	}
+
+#else
+	InputManager* input = InputManager::GetInstance();
+	if (input->GetKeyInputState(KEY_INPUT_SPACE) == eInputState::ePress)
+	{
+		int a;
+		a = GetRand(2);
+		//CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
+
+		switch (a)
+		{
+		case 0:
+			CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+			break;
+		case 1:
+			CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+			break;
+		case 2:
+			CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+			break;
+			//case 3:
+			//	CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * a))));
+			break;
+		default:
+			break;
+
+		}
+
+	}
+
+#endif // D_SPAWN
 }
 
 //画面外に行ったオブジェクトの削除処理

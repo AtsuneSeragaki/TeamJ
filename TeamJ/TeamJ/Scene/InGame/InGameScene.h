@@ -2,7 +2,10 @@
 
 #include "../SceneBase.h"
 
-#define D_PIVOT
+// ifdef用
+#define D_PIVOT		// HitCeckObjectで使用
+#define D_SPAWN		// SpawnEnemyで使用
+
 
 class InGameScene : public SceneBase
 {
@@ -31,6 +34,9 @@ public:
 	virtual eSceneType GetNowSceneType() const override;
 
 private:
+	// 敵スポーン方法処理
+	void SpawnEnemy();
+
 	// 画面外に行ったオブジェクトの削除処理
 	void ScreenOutDelete();
 
