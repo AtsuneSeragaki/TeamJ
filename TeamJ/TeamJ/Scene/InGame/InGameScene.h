@@ -13,7 +13,7 @@
 class InGameScene : public SceneBase
 {
 private:
-
+	int image;
 	int enemy_num;
 	class ReticleObject* reticle;
 	class Time* time;

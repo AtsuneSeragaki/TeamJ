@@ -11,10 +11,10 @@
 // デバック用 一旦書き込んだだけ
 #include "../../Utility/InputManager.h"
 #include "DxLib.h"
-
+#include "../../Utility/ResourceManager.h"
 
 // コンストラクタ
-InGameScene::InGameScene() : enemy_num(0)
+InGameScene::InGameScene() : enemy_num(0), image(0)
 {
 	reticle = CreateObject<ReticleObject>(Vector2D(0.0f, 0.0f));
 	/*デバック用*/
@@ -37,6 +37,12 @@ void InGameScene::Initialize()
 {
 	score->Initialize();
 	time->Initialize();
+
+	ResourceManager* rm = ResourceManager::GetInstance();
+	std::vector<int>tmp;
+	tmp = rm->GetImages("Resource/Images/backscreen1.png");
+	image = tmp[0];
+
 }
 
 // 更新処理
@@ -79,16 +85,23 @@ eSceneType InGameScene::Update()
 // 描画処理
 void InGameScene::Draw() const
 {
-	DrawBox(0, 0, 700, 700, 0x786458, TRUE);
+	// 背景画像の描画
+	DrawExtendGraph(0, 0, 640, 480, image, TRUE);
+
+	//DrawBox(0, 0, 700, 700, 0x786458, TRUE);
 
 	time->Draw();
 	score->Draw();
 
 	for (int i = 0; i < 3; i++)
 	{
-		DrawBox(0, 90 + i * 110, 700, 125 + i * 110, 0x855a42, TRUE);
-		DrawBox(0, 125 + i * 110, 700, 140 + i * 110, 0x7a564a, TRUE);
+		//DrawBox(0, 90 + i * 110, 700, 125 + i * 110, 0x855a42, TRUE);
+		//DrawBox(0, 125 + i * 110, 700, 140 + i * 110, 0x7a564a, TRUE);
 	}
+
+	// test
+	//DrawRotaGraphF(320, 240, 0.5f, 0.0f, image, TRUE, FALSE);
+
 	
 	for (GameObject* obj : objects)
 	{
@@ -219,8 +232,9 @@ void InGameScene::SpawnEnemy()
 	{
 		int a;
 		a = GetRand(2);
+		CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
 		//CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
-		if (enemy_num < D_MAX_SPAWN)
+		/*if (enemy_num < D_MAX_SPAWN)
 		{
 			switch (a)
 			{
@@ -243,10 +257,10 @@ void InGameScene::SpawnEnemy()
 				break;
 			}
 
-		}
+		}*/
 
 	}
-	DrawFormatString(320, 340, 0xffffff, "%d", enemy_num, TRUE);
+	//DrawFormatString(320, 340, 0xffffff, "%d", enemy_num, TRUE);
 #endif // D_SPAWN
 }
 
