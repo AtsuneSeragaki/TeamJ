@@ -90,9 +90,6 @@ void InGameScene::Draw() const
 
 	//DrawBox(0, 0, 700, 700, 0x786458, TRUE);
 
-	time->Draw();
-	score->Draw();
-
 	for (int i = 0; i < 3; i++)
 	{
 		//DrawBox(0, 90 + i * 110, 700, 125 + i * 110, 0x855a42, TRUE);
@@ -115,6 +112,8 @@ void InGameScene::Draw() const
 
 	reticle->Draw();
 
+	time->Draw();
+	score->Draw();
 }
 
 // 終了時処理

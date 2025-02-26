@@ -15,7 +15,7 @@ private:
 	int ejection_cnt;
 
 	int font_bullet;
-
+	int font_loading;
 	
 
 public:

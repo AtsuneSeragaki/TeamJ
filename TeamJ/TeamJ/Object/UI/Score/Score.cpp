@@ -3,7 +3,7 @@
 
 int Score::score = 0;
 
-Score::Score() : /*score(0),*/add_score(0),subtract_score(0),add_flg(false),subtract_flg(false),draw_add_score{},draw_subtract_score{},draw_add_score_cnt{},draw_subtract_score_cnt{},draw_add_score_pos{},draw_subtract_score_pos{}
+Score::Score() : /*score(0),*/add_score(0),subtract_score(0),add_flg(false),subtract_flg(false),draw_add_score{},draw_subtract_score{},draw_add_score_cnt{},draw_subtract_score_cnt{},draw_add_score_pos{},draw_subtract_score_pos{},font_score(0),font_score2(0)
 {
 }
 
@@ -26,6 +26,9 @@ void Score::Initialize()
 		draw_add_score_pos[i] = Vector2D(0.0f);
 		draw_subtract_score_pos[i] = Vector2D(0.0f);
 	}
+
+	font_score = CreateFontToHandle("Stencil", 23, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_score2 = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	
 }
 
@@ -117,7 +120,16 @@ void Score::Draw() const
 {
 	// スコア描画
 	SetFontSize(23);
-	DrawFormatString(460, 23, 0xffffff,"SCORE:%07d",score);
+	//DrawFormatString(460, 23, 0xffffff,"SCORE:%07d",score);
+	if (score >= 999999)
+	{
+		DrawStringToHandle(460, 23, "SCORE : 999999", 0xffffff, font_score);
+	}
+	else
+	{
+		DrawFormatStringToHandle(460, 23, 0xffffff, font_score, "SCORE : %06d", score);
+	}
+	
 
 	for (int i = 0; i < 50; i++)
 	{

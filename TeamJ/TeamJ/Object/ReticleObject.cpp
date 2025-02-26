@@ -50,6 +50,8 @@ void ReticleObject::Initialize()
 	ChangeVolumeSoundMem(130, sound[1]);
 
 	font_bullet = CreateFontToHandle("Stencil", 20, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_loading = CreateFontToHandle("Stencil", 60, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+
 }
 
 void ReticleObject::Update()
@@ -141,15 +143,24 @@ void ReticleObject::Update()
 
 void ReticleObject::Draw() const
 {
-	DrawBoxAA(location.x-box_size.x*0.5f,location.y-box_size.y*0.5f, location.x + box_size.x * 0.5f, location.y + box_size.y * 0.5f, 0xffffff, TRUE);
-	DrawString(0, 0, "a", 0xffffff);
-	DrawFormatString(0, 30, 0xffffff, "%f %f", location.x, location.y);
+	//DrawBoxAA(location.x-box_size.x*0.5f,location.y-box_size.y*0.5f, location.x + box_size.x * 0.5f, location.y + box_size.y * 0.5f, 0xffffff, TRUE);
+	//DrawString(0, 0, "a", 0xffffff);
+	//DrawFormatString(0, 30, 0xffffff, "%f %f", location.x, location.y);
 
 	DrawRotaGraphF(location.x, location.y, 1.0f, 0.0f, img[0], TRUE, FALSE);
 
 	//DrawBoxAA(580 - box2_size.x * 0.5f, 420 - box2_size.y * 0.5f, 580 + box2_size.x * 0.5f, 420 + box2_size.y * 0.5f, 0xffffff, TRUE);
 	DrawRotaGraphF(560, 420, 0.1f, PI / 180 * 90, img[1], TRUE, FALSE);
-	DrawFormatStringToHandle(575, 420, 0x000000, font_bullet, "Å~%d", bullet);
+	DrawFormatStringToHandle(575, 420, 0xffffff, font_bullet, "Å~%d", bullet);
+
+	// ÇÎÅ[
+	if (reload_cnt != 0)
+	{
+		DrawStringToHandle(125, 175, "Now Loading...", 0x000000, font_loading);
+		DrawStringToHandle(120, 170, "Now Loading...", 0xffffff, font_loading);
+	}
+
+	//DrawStringToHandle(120, 200, "Now Loading...", 0xffffff, font_loading);
 }
 
 void ReticleObject::Finalize()

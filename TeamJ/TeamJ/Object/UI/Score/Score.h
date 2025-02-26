@@ -18,6 +18,9 @@ private:
 	Vector2D draw_add_score_pos[50];
 	Vector2D draw_subtract_score_pos[50];
 
+	int font_score;
+	int font_score2;
+
 public:
 	static int score; // スコア
 
