@@ -29,6 +29,8 @@ void EndScene::Initialize()
 	std::vector<int>tmp;
 	tmp = rm->GetImages("Resource/Images/buttonLong_beige.png");
 	image = tmp[0];
+	tmp = rm->GetImages("Resource/Images/end.png");
+	background_image = tmp[0];
 
 	int tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/B00023_kamatamago_kouya-miti.mp3");
@@ -44,11 +46,11 @@ void EndScene::Initialize()
 // 更新処理
 eSceneType EndScene::Update()
 {
-	InputManager* input = InputManager::GetInstance();
+	//InputManager* input = InputManager::GetInstance();
 
 	PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, FALSE);
 
-	if (push_flg == false)
+	/*if (push_flg == false)
 	{
 		if (input->GetButtonDown(XINPUT_BUTTON_B))
 		{
@@ -67,6 +69,13 @@ eSceneType EndScene::Update()
 			cnt = 0;
 			return eSceneType::eNone;
 		}
+	}*/
+
+	cnt++;
+
+	if (cnt >= 260)
+	{
+		return eSceneType::eNone;
 	}
 
 	return GetNowSceneType();
@@ -75,8 +84,10 @@ eSceneType EndScene::Update()
 // 描画処理
 void EndScene::Draw() const
 {
-	DrawRotaGraphF(location.x, location.y, 1.0f, 0.0f, image, TRUE, FALSE);
-	DrawStringToHandle(location.x - 37, location.y - 25, "END", 0x000000, font_button);
+	/*DrawRotaGraphF(location.x, location.y, 1.0f, 0.0f, image, TRUE, FALSE);
+	DrawStringToHandle(location.x - 37, location.y - 25, "END", 0x000000, font_button);*/
+
+	DrawGraph(0, 0, background_image, FALSE);
 }
 
 // 終了時処理

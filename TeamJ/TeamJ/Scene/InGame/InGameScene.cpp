@@ -48,7 +48,7 @@ void InGameScene::Initialize()
 	int tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/Black_Onion.mp3");
 	ingame_bgm = tmp2; 
-
+	ChangeVolumeSoundMem(150, ingame_bgm);
 }
 
 // 更新処理

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../SceneBase.h"
-#define RANKING_DATA (5)
+#define RANKING_DATA (3)
 
 class RankingScene : public SceneBase
 {
@@ -38,11 +38,13 @@ private:
 	//データ入れ替え処理
 	void SortData();
 
-	//ランキングの入れ替え
-	void SetRank(int score);
-
 public:
 	// 現在のシーン情報を返す
 	virtual eSceneType GetNowSceneType() const override;
 
+	//ランキングの入れ替え
+	void SetRank(int score);
+
+	// 3位のスコアを取得する処理
+	int GetScoreNo3() { return score[2]; }
 };

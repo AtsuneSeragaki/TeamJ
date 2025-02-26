@@ -36,6 +36,8 @@ void Time::Initialize()
 	tmp2 = rm->GetSounds("Resource/Sounds/Countdown02-2.mp3");
 	sound = tmp2; 
 
+	ChangeVolumeSoundMem(255, sound);
+
 	// フォント作成
 	font_time = CreateFontToHandle("Stencil", 23, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 }
@@ -67,18 +69,18 @@ void Time::Draw() const
 	if (cnt <= 30)
 	{// 残り0.5秒だったら
 
-		DrawBoxAA(70.0f, 20.0f, 70.0f, 22.0f + bar_height, 0xff0000, TRUE);
+		DrawBoxAA(70.0f, 20.0f, 70.0f, 22.0f + bar_height, 0xd95e4d, TRUE);
 	}
 	else if (cnt <= 600)
 	{// 10秒より小さかったら
 
-		DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xff0000, TRUE);
+		DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xd95e4d, TRUE);
 	}
-	else if(cnt <= 1200)
-	{// 20秒より小さかったら
+	//else if(cnt <= 1200)
+	//{// 20秒より小さかったら
 
-		DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xff7f50, TRUE);
-	}
+	//	DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xe37e58, TRUE);
+	//}
 	else
 	{// 上記以外
 

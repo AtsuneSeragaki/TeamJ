@@ -3,10 +3,12 @@
 #include "../../Utility/ResourceManager.h"
 #include "../../Object/UI/Score/Score.h"
 #include "../../Utility/ResourceManager.h"
+#include "../../Scene/Ranking/RankingScene.h"
 #include "DxLib.h"
 
+
 // コンストラクタ
-ResultScene::ResultScene():menu_num(0),push_flg(false),cnt(0),score_display(0),sound{},font_scene_name(0),font_result(0),font_button(0),font_rank(0),rank(0),rank_cnt(0),score(0)
+ResultScene::ResultScene():menu_num(0),push_flg(false),cnt(0),score_display(0),sound{},font_scene_name(0),font_result(0),font_button(0),font_rank(0),rank(0),rank_cnt(0),score(0),font_high_score(0),ranking(nullptr)
 {
 }
 
@@ -57,6 +59,10 @@ void ResultScene::Initialize()
 	font_result = CreateFontToHandle("Stencil", 75, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	font_rank = CreateFontToHandle("Stencil", 90, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_high_score = CreateFontToHandle("Stencil", 30, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+
+	ranking = new RankingScene();
+	ranking->Initialize();
 }
 
 // 更新処理
@@ -124,7 +130,7 @@ eSceneType ResultScene::Update()
 	}
 
 	// Bボタンで決定：選択したボタンの画面に遷移する
-	if (input->GetButtonDown(XINPUT_BUTTON_B) || input->GetKeyInputState(KEY_INPUT_B) == eInputState::ePress)
+	if (score == score_display && input->GetButtonDown(XINPUT_BUTTON_B) || input->GetKeyInputState(KEY_INPUT_B) == eInputState::ePress)
 	{
 		PlaySoundMem(sound[1], DX_PLAYTYPE_BACK, TRUE);
 
@@ -170,7 +176,7 @@ void ResultScene::Draw() const
 	}
 
 	// リザルト文字描画
-	DrawStringToHandle(240, 40, "RESULT", 0x000000, font_scene_name);
+	DrawStringToHandle(240, 30, "RESULT", 0x000000, font_scene_name);
 
 	// スコア描画
 	DrawFormatStringToHandle(65, 120, 0x000000, font_result,"SCORE:%06d",score_display);
@@ -180,21 +186,21 @@ void ResultScene::Draw() const
 
 	// ランク描画：スコアに応じてランクの表示を変える
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, rank_cnt);
-	if (score >= 5000)
+	if (score >= 20000)
 	{
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 48.0f, 32, 0xfd7e00, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 49.0f, 32, 0xfd7e00, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 50.0f, 32, 0xfd7e00, FALSE);
 		DrawRotaStringToHandle(274 - 30, 264, 1.0f, 1.0f, 45.0f, 45.0f, -PI / 180 * 10.0f, 0xfd7e00, font_rank, 0x000000, FALSE, "S");
 	}
-	else if (score >= 3000)
+	else if (score >= 15000)
 	{
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 48.0f, 32, 0xff0000, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 49.0f, 32, 0xff0000, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 50.0f, 32, 0xff0000, FALSE);
 		DrawRotaStringToHandle(270 - 30, 262, 1.0f, 1.0f, 45.0f, 45.0f, -PI / 180 * 10.0f, 0xff0000, font_rank, 0x000000, FALSE, "A");
 	}
-	else if (score >= 1000)
+	else if (score >= 10000)
 	{
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 48.0f, 32, 0x2214b6, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 49.0f, 32, 0x2214b6, FALSE);
@@ -216,6 +222,11 @@ void ResultScene::Draw() const
 	DrawLineAA(160.0f, 323.0f, 510.0f, 323.0f, 0x000000);
 	DrawLineAA(160.0f, 324.0f, 510.0f, 324.0f, 0x000000);
 	DrawLineAA(160.0f, 325.0f, 510.0f, 325.0f, 0x000000);
+
+	if (ranking->GetScoreNo3() < score)
+	{
+		DrawStringToHandle(355, 90, "HIGH SCORE!", 0xdd0000, font_high_score);
+	}
 }
 
 // 終了時処理
@@ -226,6 +237,9 @@ void ResultScene::Finalize()
 
 	//フラグのリセット
 	bgm_flg = false;
+
+	// ランキングにスコア登録
+	ranking->SetRank(score);
 }
 
 // 現在のシーン情報を返す
@@ -239,7 +253,7 @@ void ResultScene::ChangeRankBlendParam()
 {
 	if (rank_cnt < 254)
 	{
-		rank_cnt += 2;
+		rank_cnt ++;
 	}
 	else
 	{
@@ -252,28 +266,26 @@ void ResultScene::AddDisplayScore()
 {
 	if (score_display < score)
 	{
-		if (score >= 5000)
+		if (score >= 20000)
 		{
-
+			score_display += 750;
 		}
-		else if(score >= 3000)
+		else if(score >= 15000)
 		{
-			 
+			score_display += 550;
 		}
-		else if (score >= 1000)
+		else if (score >= 10000)
 		{
-
+			score_display += 250;
 		}
-		else if (score >= 500)
+		else if (score >= 5000)
 		{
-
+			score_display += 50;
 		}
 		else
 		{
-			
+			score_display += 10;
 		}
-
-		score_display += 10;
 	}
 	else
 	{

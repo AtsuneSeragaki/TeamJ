@@ -32,6 +32,10 @@ private:
 	int result_bgm;
 	bool bgm_flg;
 
+	int font_high_score;
+
+	class RankingScene* ranking;
+
 public:
 	// コンストラクタ
 	ResultScene();

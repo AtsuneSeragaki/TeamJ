@@ -4,7 +4,7 @@
 #include "../../Utility/ResourceManager.h"
 
 // コンストラクタ
-RankingScene::RankingScene() :score{}, rank{}, sound2{},button_image(), font_button(), font_scene_name(), font_score(),ranking_bgm()
+RankingScene::RankingScene() :score{}, rank{}, sound2{},button_image(), font_button(), font_scene_name(), font_score(),ranking_bgm(),bgm_flg(false)
 {
 }
 
@@ -106,7 +106,7 @@ void RankingScene::Draw() const
     DrawStringToHandle(180, 20, "RANKING", 0x000000, font_scene_name);
 
     //順位の描画
-    for (int i = 0; i < RANKING_DATA - 2; ++i)
+    for (int i = 0; i < RANKING_DATA; ++i)
 	{
         DrawFormatStringToHandle(80, 105 + i * 85, GetColor(0, 0, 0), font_score, "No.%d  %05d", i + 1, score[i]);
 	}
@@ -183,14 +183,13 @@ void RankingScene::SortData()
 void RankingScene::SetRank(int score)
 {
     //5位から順位を設定する
-    if (this->score[5] < score)
+    if (this->score[RANKING_DATA - 1] < score)
     {
-        if (this->score[4] != score && this->score[3] != score && this->score[2] != score && this->score[1] != score && this->score[0] != score)
+        if (this->score[RANKING_DATA - 2] != score && this->score[RANKING_DATA - 3] != score)
         {
-            this->score[5] = score;
+            this->score[RANKING_DATA - 1] = score;
             SortData();
         }
-        
     }
 }
 

@@ -147,9 +147,7 @@ void Score::Draw() const
 
 		if (draw_subtract_score_cnt[i] != -1)
 		{
-			//DrawFormatString(draw_subtract_score_pos[i].x, draw_subtract_score_pos[i].y - 50.0f, 0xffffff, "-%d", draw_subtract_score[i]);
-			DrawFormatStringToHandle(draw_add_score_pos[i].x + 5.0f, draw_add_score_pos[i].y - 55.0f, 0xfdddcb, font_score, "+%d", draw_add_score[i]);
-			DrawFormatStringToHandle(draw_subtract_score_pos[i].x, draw_subtract_score_pos[i].y - 50.0f, 0xfdddcb, font_score, "+%d", draw_subtract_score[i]);
+			DrawFormatStringToHandle(draw_subtract_score_pos[i].x, draw_subtract_score_pos[i].y - 50.0f, 0xfdddcb, font_score, "-%d", draw_subtract_score[i]);
 		}
 	}
 
