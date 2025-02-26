@@ -51,4 +51,7 @@ private:
 
 	// 当たり判定チェック処理
 	void HitCheckObject(GameObject* a, GameObject* b);
+
+	// 倒した敵に応じてスコアを加減算する処理(引数:オブジェクトタイプ)
+	void ChangeScore(GameObject* a, GameObject* b                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  );
 };

@@ -312,6 +312,7 @@ void InGameScene::HitCheckObject(GameObject* a, GameObject* b)
 	//距離より大きさが大きい場合、Hit判定とする
 	if ((fabsf(diff.x) < box_size.x) && (fabsf(diff.y) < box_size.y))
 	{
+		ChangeScore(a, b);
 		a->OnHitCollision(b);
 		b->OnHitCollision(a);
 	}
@@ -342,3 +343,45 @@ void InGameScene::HitCheckObject(GameObject* a, GameObject* b)
 	}
 }
 #endif // D_PIVOT
+
+void InGameScene::ChangeScore(GameObject* a, GameObject* b)
+{
+	if (a->GetType() == RETICLE && a->HitFlag() == true)
+	{
+		if (b->GetType() == ENEMY)
+		{
+			score->AddScore(100,a->GetLocation());
+		}
+		else if (b->GetType() == ENEMY1)
+		{
+			score->AddScore(200, a->GetLocation());
+		}
+		else if (b->GetType() == ENEMY2)
+		{
+			score->AddScore(500, a->GetLocation());
+		}
+		else if (b->GetType() == ENEMY3)
+		{
+			score->SubtractScore(100, a->GetLocation());
+		}
+	}
+	else if(b->GetType() == RETICLE && b->HitFlag() == true)
+	{
+		if (a->GetType() == ENEMY)
+		{
+			score->AddScore(100, b->GetLocation());
+		}
+		else if (a->GetType() == ENEMY1)
+		{
+			score->AddScore(200, b->GetLocation());
+		}
+		else if (a->GetType() == ENEMY2)
+		{
+			score->AddScore(500, b->GetLocation());
+		}
+		else if (a->GetType() == ENEMY3)
+		{
+			score->SubtractScore(100, b->GetLocation());
+		}
+	}
+}
