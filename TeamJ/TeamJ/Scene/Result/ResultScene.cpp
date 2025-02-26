@@ -2,6 +2,7 @@
 #include "../../Utility/InputManager.h"
 #include "../../Utility/ResourceManager.h"
 #include "../../Object/UI/Score/Score.h"
+#include "../../Utility/ResourceManager.h"
 #include "DxLib.h"
 
 // コンストラクタ
@@ -24,6 +25,7 @@ void ResultScene::Initialize()
 	score_display = 0;
 	rank = 0;
 	rank_cnt = 0;
+	bgm_flg = false;
 
 	// スコア取得
 	score = Score::score;
@@ -45,6 +47,11 @@ void ResultScene::Initialize()
 	tmp2 = rm->GetSounds("Resource/Sounds/cursol_push.mp3");
 	sound[1] = tmp2;
 
+	//BGMの読み込み
+	int tmp3;
+	tmp3 = rm->GetSounds("Resource/Sounds/Fothracha.mp3");
+	result_bgm = tmp3;
+
 	// フォントデータ作成
 	font_scene_name = CreateFontToHandle("Stencil", 50, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	font_result = CreateFontToHandle("Stencil", 75, -1, DX_FONTTYPE_ANTIALIASING_4X4);
@@ -59,6 +66,18 @@ eSceneType ResultScene::Update()
 
 	AddDisplayScore();
 	ChangeRankBlendParam();
+
+	//一度だけこの処理を通るようにする
+	if (bgm_flg == false)
+	{
+		//BGMの再生を最初から流れるよう設定
+		SetSoundCurrentTime(0, result_bgm);
+		//BGMのの再生
+		PlaySoundMem(result_bgm, DX_PLAYTYPE_BACK, FALSE);
+
+		//trueにし、何度も更新しないようにする
+		bgm_flg = true;
+	}
 
 	// 左スティックでボタン移動
 	if (push_flg == false)
@@ -202,7 +221,11 @@ void ResultScene::Draw() const
 // 終了時処理
 void ResultScene::Finalize()
 {
+	//BGMの再生を止める
+	StopSoundMem(result_bgm);
 
+	//フラグのリセット
+	bgm_flg = false;
 }
 
 // 現在のシーン情報を返す

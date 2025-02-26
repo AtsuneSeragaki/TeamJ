@@ -29,6 +29,9 @@ private:
 	int score;
 	int score_display;
 
+	int result_bgm;
+	bool bgm_flg;
+
 public:
 	// コンストラクタ
 	ResultScene();

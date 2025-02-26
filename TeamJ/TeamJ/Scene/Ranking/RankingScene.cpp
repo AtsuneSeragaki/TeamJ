@@ -4,7 +4,7 @@
 #include "../../Utility/ResourceManager.h"
 
 // コンストラクタ
-RankingScene::RankingScene() :score{}, rank{}, sound2{},button_image(), font_button(), font_scene_name(), font_score()
+RankingScene::RankingScene() :score{}, rank{}, sound2{},button_image(), font_button(), font_scene_name(), font_score(),ranking_bgm()
 {
 }
 
@@ -31,12 +31,20 @@ void RankingScene::Initialize()
     sound2[0] = tmp2;
     tmp2 = rm->GetSounds("Resource/Sounds/cursor_sound.mp3");
     sound2[1] = tmp2;
+    
+    //BGMの読み込み
+    int tmp3;
+    tmp3 = rm->GetSounds("Resource/Sounds/Bruyeres_2.mp3");
+    ranking_bgm= tmp3;
 
     //フォントの読み込み
     font_scene_name = CreateFontToHandle("Stencil", 65, -1, DX_FONTTYPE_ANTIALIASING_4X4);
     font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
     font_score = CreateFontToHandle("Stencil", 85, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	
+    //
+    bgm_flg = false;
+
     // ランキングデータの読み込み
     FILE* fp = nullptr;
 
@@ -63,6 +71,19 @@ void RankingScene::Initialize()
 // 更新処理
 eSceneType RankingScene::Update()
 {
+    //一度だけこの処理を通るようにする
+    if (bgm_flg == false)
+    {
+        //BGMの再生を最初から流れるよう設定
+        SetSoundCurrentTime(0, ranking_bgm);
+        //BGMのの再生
+        PlaySoundMem(ranking_bgm, DX_PLAYTYPE_BACK, FALSE);
+
+        //trueにし、何度も更新しないようにする
+        bgm_flg = true;
+    }
+    
+
     //Bボタンを押したらタイトルに戻るようにする
     InputManager* input = InputManager::GetInstance();
     if (input->GetButtonDown(XINPUT_BUTTON_B))
@@ -98,7 +119,11 @@ void RankingScene::Draw() const
 // 終了時処理
 void RankingScene::Finalize()
 {
+    //BGMの再生を止める
+    StopSoundMem(ranking_bgm);
 
+    //フラグのリセット
+    bgm_flg = false;
 }
 
 void RankingScene::SortData()
