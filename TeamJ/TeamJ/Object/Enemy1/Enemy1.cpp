@@ -63,10 +63,10 @@ void Enemy1::Draw() const
 	//DrawBoxAA(t1.x, t1.y, br.x, br.y, GetColor(0, 255, 255), TRUE);
 	DrawRotaGraphF(location.x, location.y, 0.08f, 0.0f, image, TRUE, FALSE);
 	// 白い四角の現在の位置情報
-	DrawFormatString(20, 120, 0xffffff, "Enemy1X座標 %f Y座標 %f", t1.x, br.y, TRUE);
+	//DrawFormatString(20, 120, 0xffffff, "Enemy1X座標 %f Y座標 %f", t1.x, br.y, TRUE);
 
 	//オブジェクトのタイプの種類を確認(デバッグ)
-	DrawFormatString(400, 120, 0xffffff, "このオブジェクトのtypeは%d", type, TRUE);
+	//DrawFormatString(400, 120, 0xffffff, "このオブジェクトのtypeは%d", type, TRUE);
 
 
 	// 親クラスの描画処理を呼び出す(当たり判定の目安)
