@@ -77,7 +77,7 @@ eSceneType RankingScene::Update()
         //BGMの再生を最初から流れるよう設定
         SetSoundCurrentTime(0, ranking_bgm);
         //BGMのの再生
-        PlaySoundMem(ranking_bgm, DX_PLAYTYPE_BACK, FALSE);
+        PlaySoundMem(ranking_bgm, DX_PLAYTYPE_LOOP, FALSE);
 
         //trueにし、何度も更新しないようにする
         bgm_flg = true;
