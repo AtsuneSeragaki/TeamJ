@@ -15,6 +15,7 @@ private:
 	float bar_width;      // バーの幅
 	float bar_height;     // バーの高さ
 	std::vector<int> img; // バーの画像
+	int sound;
 
 public:
 	// コンストラクタ

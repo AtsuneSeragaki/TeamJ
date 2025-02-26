@@ -11,10 +11,12 @@ private:
 	int bullet;
 	int reload_cnt;
 	int img[2];
-	int sound[6];
+	int sound[9];
 	int ejection_cnt;
 
 	int font_bullet;
+
+	
 
 public:
 	// ‰Šú‰»ˆ—
@@ -26,5 +28,8 @@ public:
 	// I—¹ˆ—
 	void Finalize() override;
 	void HitCheck(void);
+
+private:
+	void OnHitCollision(GameObject* object) override;
 };
 

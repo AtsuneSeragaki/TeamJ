@@ -47,7 +47,7 @@ void TitleScene::Initialize()
 	tmp2 = rm->GetSounds("Resource/Sounds/title_bgm.mp3");
 	bgm = tmp2;
 
-	font_scene_name = CreateFontToHandle("Stencil", 60, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_scene_name = CreateFontToHandle("Stencil", 80, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 }
 
@@ -130,11 +130,11 @@ void TitleScene::Draw() const
 {
 	DrawGraph(-223, 0, background_image, FALSE);
 
-	//DrawStringToHandle(200, 25, "RESULT", 0xffffff, font_scene_name);
+	DrawStringToHandle(75, 75, "Bottle Shot", 0x000000, font_scene_name);
+	DrawStringToHandle(70, 70, "Bottle Shot", 0xffffff, font_scene_name);
 	
-
 	SetFontSize(20);
-	DrawString(10, 10, "TITLE", 0xffffff);
+	//DrawString(10, 10, "Bottle Shot", 0xffffff);
 
 	if (menu_num == 0)
 	{

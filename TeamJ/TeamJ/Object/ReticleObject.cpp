@@ -39,6 +39,15 @@ void ReticleObject::Initialize()
 	sound[4] = tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/gun_slide.mp3");
 	sound[5] = tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/beep.mp3");
+	sound[6] = tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/bottle1.mp3");
+	sound[7] = tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/bottle2.mp3");
+	sound[8] = tmp2;
+
+	ChangeVolumeSoundMem(130, sound[0]);
+	ChangeVolumeSoundMem(130, sound[1]);
 
 	font_bullet = CreateFontToHandle("Stencil", 20, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 }
@@ -90,6 +99,9 @@ void ReticleObject::Update()
 			PlaySoundMem(sound[1], DX_PLAYTYPE_BACK, TRUE);
 			ejection_cnt = 0;
 		}
+
+		PlaySoundMem(sound[6], DX_PLAYTYPE_BACK, TRUE);
+		
 	}
 	else
 	{
@@ -135,7 +147,7 @@ void ReticleObject::Draw() const
 
 	DrawRotaGraphF(location.x, location.y, 1.0f, 0.0f, img[0], TRUE, FALSE);
 
-	DrawBoxAA(580 - box2_size.x * 0.5f, 420 - box2_size.y * 0.5f, 580 + box2_size.x * 0.5f, 420 + box2_size.y * 0.5f, 0xffffff, TRUE);
+	//DrawBoxAA(580 - box2_size.x * 0.5f, 420 - box2_size.y * 0.5f, 580 + box2_size.x * 0.5f, 420 + box2_size.y * 0.5f, 0xffffff, TRUE);
 	DrawRotaGraphF(560, 420, 0.1f, PI / 180 * 90, img[1], TRUE, FALSE);
 	DrawFormatStringToHandle(575, 420, 0x000000, font_bullet, "~%d", bullet);
 }
@@ -148,4 +160,20 @@ void ReticleObject::Finalize()
 void ReticleObject::HitCheck(void)
 {
 	
+}
+
+void ReticleObject::OnHitCollision(GameObject* object)
+{
+	if (hit_flg == true)
+	{
+		StopSoundMem(sound[6]);
+		if(object->GetType()==ENEMY3)
+		{
+			PlaySoundMem(sound[7], DX_PLAYTYPE_BACK, TRUE);
+		}
+		else
+		{
+			PlaySoundMem(sound[8], DX_PLAYTYPE_BACK, TRUE);
+		}
+	}
 }

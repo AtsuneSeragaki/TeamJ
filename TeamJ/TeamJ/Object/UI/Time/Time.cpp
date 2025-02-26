@@ -30,6 +30,10 @@ void Time::Initialize()
 	img.push_back(tmp[0]);
 	tmp = rm->GetImages("Resource/Images/bar_inside2.png");
 	img.push_back(tmp[0]);
+
+	int tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/Countdown02-2.mp3");
+	sound = tmp2;
 }
 
 void Time::Update()
@@ -44,6 +48,11 @@ void Time::Update()
 	{
 		cnt = 3600;
 	}*/
+
+	if (cnt == 180)
+	{
+		PlaySoundMem(sound, DX_PLAYTYPE_BACK, TRUE);
+	}
 }
 
 void Time::Draw() const
@@ -63,6 +72,7 @@ void Time::Draw() const
 		DrawBoxAA(55.0f, 20.0f, 55.0f + (bar_width / 3600.0f * (float)cnt), 20.0f + bar_height, 0xff0000, TRUE);
 		//DrawExtendGraph(43.0f, 30.0f, 43.0f + (bar_width / 3600.0f * (float)cnt), 30.0f + bar_height + 5,img[3],TRUE);
 		//DrawBoxAA(BAR_X + 5.0f, BAR_Y + 2.0f, BAR_X + (BAR_WIDTH / 3600.0f * (float)cnt), BAR_Y + BAR_HEIGHT, 0xf7464d, TRUE);
+
 	}
 	else if(cnt <= 1200)
 	{// 20秒より小さかったら
