@@ -19,10 +19,10 @@ void Enemy3::Initialize()
 	type = ENEMY3;
 
 	// ボックスのサイズ(当たり判定の大きさ)
-	box_size = 50.0f;
+	box_size = Vector2D(25.0f, 75.0f);
 
 	// テキの移動する位置
-	direction = Vector2D(2.5f, 0.0f);
+	direction = Vector2D(1.3f, 0.0f);
 
 	// 進行方向
 	//location = Vector2D((0.0f - 25.0f), 420.0f);
@@ -62,7 +62,7 @@ void Enemy3::Draw() const
 	Vector2D t1 = location - (box_size / 2.0f);
 	Vector2D br = location + (box_size / 2.0f);
 	//DrawBoxAA(t1.x, t1.y, br.x, br.y, GetColor(255, 0, 255), TRUE);
-	DrawRotaGraphF(location.x, location.y, 0.05f, 0.0f, image, TRUE, FALSE);
+	DrawRotaGraphF(location.x, location.y, 0.08f, 0.0f, image, TRUE, FALSE);
 
 	// 白い四角の現在の位置情報
 	DrawFormatString(20, 160, 0xffffff, "Enemy3X座標 %f Y座標 %f", t1.x, br.y, TRUE);

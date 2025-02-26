@@ -146,16 +146,16 @@ void InGameScene::SpawnEnemy()
 			{
 				// 一番上の段 一レーンに的野和生成する
 			case 0:
-				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy>(Vector2D(-25.0f, 50.0f));
 				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
-				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy>(Vector2D(-25.0f, 225.0f));
 				enemy_num++;
 				break;
 			case 2:
-				CreateObject<Enemy>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy>(Vector2D(-25.0f, 400.0f));
 				enemy_num++;
 				break;
 			}
@@ -166,17 +166,17 @@ void InGameScene::SpawnEnemy()
 			{
 				// 一番上の段
 			case 0:
-				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy1>(Vector2D(-25.0f, 65.0f));
 				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
-				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy1>(Vector2D(-25.0f, 235.0f));
 				enemy_num++;
 				break;
 				// 一番下の段
 			case 2:
-				CreateObject<Enemy1>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy1>(Vector2D(-25.0f, 415.0f));
 				enemy_num++;
 				break;
 			}
@@ -188,17 +188,17 @@ void InGameScene::SpawnEnemy()
 			{
 				// 一番上の段
 			case 0:
-				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy2>(Vector2D(-25.0f, 65.0f));
 				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
-				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy2>(Vector2D(-25.0f, 245.0f));
 				enemy_num++;
 				break;
 				// 一番下の段
 			case 2:
-				CreateObject<Enemy2>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy2>(Vector2D(-25.0f, 420.0f));
 				enemy_num++;
 				break;
 			}
@@ -209,17 +209,17 @@ void InGameScene::SpawnEnemy()
 			{
 				// 一番上の段
 			case 0:
-				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy3>(Vector2D(-25.0f, 60.0f));
 				enemy_num++;
 				break;
 				// 真ん中の段
 			case 1:
-				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy3>(Vector2D(-25.0f, 245.0f));
 				enemy_num++;
 				break;
 				// 一番下の段
 			case 2:
-				CreateObject<Enemy3>(Vector2D(-25.0f, 100.0f + (80 + (100 * e_spawn))));
+				CreateObject<Enemy3>(Vector2D(-25.0f, 415.0f));
 				enemy_num++;
 				break;
 			}
@@ -232,7 +232,7 @@ void InGameScene::SpawnEnemy()
 	{
 		int a;
 		a = GetRand(2);
-		CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
+		CreateObject<Enemy3>(Vector2D((0.0f - 25.0f), 60.0f));
 		//CreateObject<Enemy>(Vector2D((0.0f - 25.0f), 240.0f));
 		/*if (enemy_num < D_MAX_SPAWN)
 		{

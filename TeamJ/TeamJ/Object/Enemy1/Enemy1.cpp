@@ -19,7 +19,7 @@ void Enemy1::Initialize()
 	type = ENEMY1;
 
 	// ボックスのサイズ(当たり判定の大きさ)
-	box_size = 50.0f;
+	box_size = Vector2D(30.0f, 70.0f);
 
 	// テキの移動する位置
 	direction = Vector2D(1.5f, 0.0f);
@@ -61,7 +61,7 @@ void Enemy1::Draw() const
 	Vector2D t1 = location - (box_size / 2.0f);
 	Vector2D br = location + (box_size / 2.0f);
 	//DrawBoxAA(t1.x, t1.y, br.x, br.y, GetColor(0, 255, 255), TRUE);
-	DrawRotaGraphF(location.x, location.y, 0.06f, 0.0f, image, TRUE, FALSE);
+	DrawRotaGraphF(location.x, location.y, 0.08f, 0.0f, image, TRUE, FALSE);
 	// 白い四角の現在の位置情報
 	DrawFormatString(20, 120, 0xffffff, "Enemy1X座標 %f Y座標 %f", t1.x, br.y, TRUE);
 

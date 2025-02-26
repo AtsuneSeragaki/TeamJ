@@ -18,10 +18,10 @@ void Enemy2::Initialize()
 	type = ENEMY2;
 
 	// ボックスのサイズ(当たり判定の大きさ)
-	box_size = 50.0f;
+	box_size = Vector2D(15.0f, 40.0f);
 
 	// テキの移動する位置
-	direction = Vector2D(2.0f, 0.0f);
+	direction = Vector2D(3.0f, 0.0f);
 
 	// 進行方向
 	//location = Vector2D((0.0f - 25.0f), 360.0f);
