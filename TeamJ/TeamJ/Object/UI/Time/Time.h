@@ -17,6 +17,8 @@ private:
 	std::vector<int> img; // バーの画像
 	int sound;
 
+	int font_time;
+
 public:
 	// コンストラクタ
 	Time();

@@ -2,7 +2,7 @@
 #include "../../../Utility/ResourceManager.h"
 #include "DxLib.h"
 
-Time::Time() : cnt(0),time(0),bar_width(0.0f),bar_height(0.0f)
+Time::Time() : cnt(0),time(0),bar_width(0.0f),bar_height(0.0f),font_time(0),sound(0)
 {
 }
 
@@ -31,23 +31,26 @@ void Time::Initialize()
 	tmp = rm->GetImages("Resource/Images/bar_inside2.png");
 	img.push_back(tmp[0]);
 
+	// 音源読み込み
 	int tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/Countdown02-2.mp3");
-	sound = tmp2;
+	sound = tmp2; 
+
+	// フォント作成
+	font_time = CreateFontToHandle("Stencil", 23, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 }
 
 void Time::Update()
 {
-	cnt--;
-
-	// デバック用
-	//cnt -= 10;
-
-	// カウントが0になったらリセット
-	/*if (cnt <= 0)
+	
+	if (cnt <= 0)
 	{
-		cnt = 3600;
-	}*/
+		cnt = 0;
+	}
+	else
+	{
+		cnt--;
+	}
 
 	if (cnt == 180)
 	{
@@ -58,44 +61,33 @@ void Time::Update()
 void Time::Draw() const
 {
 	// 時間描画
-	//DrawFormatString(10, 32, 0xffffff, "%d", time);
-	SetFontSize(20);
-	DrawString(10, 23,"TIME",0xffffff);
+	DrawStringToHandle(10, 21, "TIME", 0xfdddcb, font_time);
 
 	// バーの中描画
-	//if (cnt <= 30)
-	//{
-	//	//DrawExtendGraph(BAR_X + 3.0f, BAR_Y, BAR_X + 3.0f + (bar_width / 3600.0f * (float)cnt), BAR_Y + BAR_HEIGHT + 3, img[3], TRUE);
-	//}
-	/*else */if (cnt <= 600)
-	{// 10秒より小さかったら
-		DrawBoxAA(55.0f, 20.0f, 55.0f + (bar_width / 3600.0f * (float)cnt), 20.0f + bar_height, 0xff0000, TRUE);
-		//DrawExtendGraph(43.0f, 30.0f, 43.0f + (bar_width / 3600.0f * (float)cnt), 30.0f + bar_height + 5,img[3],TRUE);
-		//DrawBoxAA(BAR_X + 5.0f, BAR_Y + 2.0f, BAR_X + (BAR_WIDTH / 3600.0f * (float)cnt), BAR_Y + BAR_HEIGHT, 0xf7464d, TRUE);
+	if (cnt <= 30)
+	{// 残り0.5秒だったら
 
+		DrawBoxAA(70.0f, 20.0f, 70.0f, 22.0f + bar_height, 0xff0000, TRUE);
+	}
+	else if (cnt <= 600)
+	{// 10秒より小さかったら
+
+		DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xff0000, TRUE);
 	}
 	else if(cnt <= 1200)
 	{// 20秒より小さかったら
-		DrawBoxAA(55.0f, 20.0f, 55.0f + (bar_width / 3600.0f * (float)cnt), 20.0f + bar_height, 0xff7f50, TRUE);
-		//DrawExtendGraph(43.0f, 30.0f, 43.0f + (bar_width / 3600.0f * (float)cnt), 30.0f + bar_height + 5, img[2], TRUE);
-		//DrawBoxAA(BAR_X + 5.0f, BAR_Y + 2.0f, BAR_X + (BAR_WIDTH / 3600.0f * (float)cnt), BAR_Y + BAR_HEIGHT, 0xea843e, TRUE);
+
+		DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xff7f50, TRUE);
 	}
-	else /*if(cnt <= 3570)*/
+	else
 	{// 上記以外
-		
-		//DrawBoxAA(BAR_X + 5.0f, BAR_Y + 2.0f, BAR_X + (BAR_WIDTH / 3600.0f * (float)cnt), BAR_Y + BAR_HEIGHT, 0x00a8f3, TRUE);
-		DrawBoxAA(55.0f, 20.0f, 55.0f + (bar_width / 3600.0f * (float)cnt), 20.0f + bar_height, 0x00a8f3, TRUE);
-		
+
+		DrawBoxAA(70.0f, 20.0f, 70.0f + (bar_width / 3600.0f * (float)cnt), 22.0f + bar_height, 0xfdddcb, TRUE);
 	}
-	//else
-	//{
-	//	//DrawExtendGraph(BAR_X + 3.0f, BAR_Y, BAR_X + 3.0f + (BAR_WIDTH / 3600.0f * (float)cnt), BAR_Y + BAR_HEIGHT + 3, img[1], TRUE);
-	//}
 
 	// バーの枠描画（線を太くするために2個描画）
-	DrawBoxAA(55.0f, 20.0f, 55.0f + bar_width, 24.0f + bar_height, 0xffffff, FALSE);
-	DrawBoxAA(56.0f, 21.0f, 54.0f + bar_width, 23.0f + bar_height, 0xffffff, FALSE);
-	//DrawGraph(BAR_X, BAR_Y, img[0], TRUE);
+	DrawBoxAA(70.0f, 20.0f, 70.0f + bar_width, 24.0f + bar_height, 0xebcebe, FALSE);
+	DrawBoxAA(71.0f, 21.0f, 69.0f + bar_width, 23.0f + bar_height, 0xebcebe, FALSE);
 }
 
 void Time::FInalize()

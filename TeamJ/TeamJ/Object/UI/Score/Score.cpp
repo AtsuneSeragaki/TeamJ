@@ -28,7 +28,7 @@ void Score::Initialize()
 	}
 
 	font_score = CreateFontToHandle("Stencil", 23, -1, DX_FONTTYPE_ANTIALIASING_4X4);
-	font_score2 = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_score2 = CreateFontToHandle("Stencil", 23, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	
 }
 
@@ -94,7 +94,7 @@ void Score::Update()
 		{
 			draw_add_score_cnt[i]++;
 
-			if (draw_add_score_cnt[i] >= 60)
+			if (draw_add_score_cnt[i] >= 30)
 			{
 				draw_add_score_cnt[i] = -1;
 				draw_add_score[i] = 0;
@@ -123,11 +123,11 @@ void Score::Draw() const
 	//DrawFormatString(460, 23, 0xffffff,"SCORE:%07d",score);
 	if (score >= 999999)
 	{
-		DrawStringToHandle(460, 23, "SCORE : 999999", 0xffffff, font_score);
+		DrawStringToHandle(460, 21, "SCORE : 999999", 0xfdddcb, font_score);
 	}
 	else
 	{
-		DrawFormatStringToHandle(460, 23, 0xffffff, font_score, "SCORE : %06d", score);
+		DrawFormatStringToHandle(460, 21, 0xfdddcb, font_score, "SCORE : %06d", score);
 	}
 	
 
@@ -135,12 +135,21 @@ void Score::Draw() const
 	{
 		if (draw_add_score_cnt[i] != -1)
 		{
-		    DrawFormatString(draw_add_score_pos[i].x, draw_add_score_pos[i].y - 50.0f, 0xffffff, "+%d", draw_add_score[i]);
+			if (draw_add_score_pos[i].y - 50.0f <= 0.0f)
+			{
+				DrawFormatStringToHandle(draw_add_score_pos[i].x, 5.0f, 0xfdddcb, font_score, "+%d", draw_add_score[i]);
+			}
+			else
+			{
+				DrawFormatStringToHandle(draw_add_score_pos[i].x, draw_add_score_pos[i].y - 50.0f, 0xfdddcb, font_score, "+%d", draw_add_score[i]);
+			}
 		}
 
 		if (draw_subtract_score_cnt[i] != -1)
 		{
-			DrawFormatString(draw_subtract_score_pos[i].x, draw_subtract_score_pos[i].y - 50.0f, 0xffffff, "-%d", draw_subtract_score[i]);
+			//DrawFormatString(draw_subtract_score_pos[i].x, draw_subtract_score_pos[i].y - 50.0f, 0xffffff, "-%d", draw_subtract_score[i]);
+			DrawFormatStringToHandle(draw_add_score_pos[i].x + 5.0f, draw_add_score_pos[i].y - 55.0f, 0xfdddcb, font_score, "+%d", draw_add_score[i]);
+			DrawFormatStringToHandle(draw_subtract_score_pos[i].x, draw_subtract_score_pos[i].y - 50.0f, 0xfdddcb, font_score, "+%d", draw_subtract_score[i]);
 		}
 	}
 

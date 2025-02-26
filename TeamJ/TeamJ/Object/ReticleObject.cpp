@@ -50,7 +50,7 @@ void ReticleObject::Initialize()
 	ChangeVolumeSoundMem(130, sound[1]);
 
 	font_bullet = CreateFontToHandle("Stencil", 20, -1, DX_FONTTYPE_ANTIALIASING_4X4);
-	font_loading = CreateFontToHandle("Stencil", 60, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	font_loading = CreateFontToHandle("Stencil", 55, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 
 }
 
@@ -151,13 +151,14 @@ void ReticleObject::Draw() const
 
 	//DrawBoxAA(580 - box2_size.x * 0.5f, 420 - box2_size.y * 0.5f, 580 + box2_size.x * 0.5f, 420 + box2_size.y * 0.5f, 0xffffff, TRUE);
 	DrawRotaGraphF(560, 420, 0.1f, PI / 180 * 90, img[1], TRUE, FALSE);
-	DrawFormatStringToHandle(575, 420, 0xffffff, font_bullet, "Å~%d", bullet);
+	DrawFormatStringToHandle(578, 423, 0x000000, font_bullet, "Å~ %d", bullet);
+	DrawFormatStringToHandle(575, 420, 0xfdddcb, font_bullet, "Å~ %d", bullet);
 
-	// ÇÎÅ[
+	// ÉäÉçÅ[ÉhíÜï`âÊ
 	if (reload_cnt != 0)
 	{
-		DrawStringToHandle(125, 175, "Now Loading...", 0x000000, font_loading);
-		DrawStringToHandle(120, 170, "Now Loading...", 0xffffff, font_loading);
+		DrawStringToHandle(105, 175, "Now Reloading...", 0x000000, font_loading);
+		DrawStringToHandle(100, 170, "Now Reloading...", 0xfdddcb, font_loading);
 	}
 
 	//DrawStringToHandle(120, 200, "Now Loading...", 0xffffff, font_loading);
