@@ -35,6 +35,7 @@ InGameScene::~InGameScene()
 // 初期化処理
 void InGameScene::Initialize()
 {
+	bgm_flg = false;
 	score->Initialize();
 	time->Initialize();
 
@@ -43,6 +44,11 @@ void InGameScene::Initialize()
 	tmp = rm->GetImages("Resource/Images/backscreen1.png");
 	image = tmp[0];
 
+	//BGMの読み込み
+	int tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/Black_Onion.mp3");
+	ingame_bgm = tmp2; 
+
 }
 
 // 更新処理
@@ -50,6 +56,18 @@ eSceneType InGameScene::Update()
 {
 	score->Update();
 	time->Update();
+
+	//一度だけこの処理を通るようにする
+	if (bgm_flg == false)
+	{
+		//BGMの再生を最初から流れるよう設定
+		SetSoundCurrentTime(0, ingame_bgm);
+		//BGMのの再生
+		PlaySoundMem(ingame_bgm, DX_PLAYTYPE_LOOP, FALSE);
+
+		//trueにし、何度も更新しないようにする
+		bgm_flg = true;
+	}
 
 	if (time->GetCount() <= 0)
 	{
@@ -119,6 +137,11 @@ void InGameScene::Draw() const
 // 終了時処理
 void InGameScene::Finalize()
 {
+	//BGMの再生を止める
+	StopSoundMem(ingame_bgm);
+
+	//フラグのリセット
+	bgm_flg = false;
 }
 
 // 現在のシーン情報を返す

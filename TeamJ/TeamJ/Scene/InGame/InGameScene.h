@@ -19,6 +19,9 @@ private:
 	class Time* time;
 	class Score* score;
 
+	int ingame_bgm;
+	bool bgm_flg;
+
 public:
 	// コンストラクタ
 	InGameScene();
