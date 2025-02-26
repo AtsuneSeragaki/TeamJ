@@ -28,6 +28,8 @@ void TitleScene::Initialize()
 	push_flg = false;
 	cnt = 0;
 
+	play_bgm = false;
+
 	ResourceManager* rm = ResourceManager::GetInstance();
 	std::vector<int>tmp;
 	tmp= rm->GetImages("Resource/Images/Title.png");
@@ -42,6 +44,8 @@ void TitleScene::Initialize()
 	sound2[0] = tmp2;
 	tmp2 = rm->GetSounds("Resource/Sounds/cursor_sound.mp3");
 	sound2[1] = tmp2;
+	tmp2 = rm->GetSounds("Resource/Sounds/title_bgm.mp3");
+	bgm = tmp2;
 
 	font_scene_name = CreateFontToHandle("Stencil", 60, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 	font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
@@ -50,6 +54,13 @@ void TitleScene::Initialize()
 // 更新処理
 eSceneType TitleScene::Update()
 {
+	// BGM再生
+	if (play_bgm == false)
+	{
+		PlaySoundMem(bgm, DX_PLAYTYPE_LOOP, TRUE);
+		play_bgm = true;
+	}
+
 	InputManager* input = InputManager::GetInstance();
 	if (push_flg == false)
 	{
@@ -175,6 +186,8 @@ void TitleScene::Draw() const
 // 終了時処理
 void TitleScene::Finalize()
 {
+	StopSoundMem(bgm);
+	play_bgm = false;
 }
 
 // 現在のシーン情報を返す

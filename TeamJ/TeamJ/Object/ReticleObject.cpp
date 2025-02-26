@@ -91,11 +91,16 @@ void ReticleObject::Update()
 			ejection_cnt = 0;
 		}
 	}
-	if (input->GetButtonUp(XINPUT_BUTTON_B))
+	else
 	{
 		push_flg = false;
 		hit_flg = false;
 	}
+	/*if (input->GetButtonUp(XINPUT_BUTTON_B))
+	{
+		push_flg = false;
+		hit_flg = false;
+	}*/
 
 	if (bullet <= 0)
 	{

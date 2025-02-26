@@ -25,6 +25,9 @@ private:
 	int font_scene_name;
 	int font_button;
 
+	int bgm;
+	bool play_bgm; 
+
 public:
 	// コンストラクタ
 	TitleScene();
