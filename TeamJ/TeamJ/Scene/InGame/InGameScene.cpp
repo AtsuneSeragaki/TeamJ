@@ -37,6 +37,7 @@ void InGameScene::Initialize()
 {
 	bgm_flg = false;
 	score->Initialize();
+	score->score = 0;
 	time->Initialize();
 
 	ResourceManager* rm = ResourceManager::GetInstance();
