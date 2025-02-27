@@ -155,6 +155,8 @@ void Score::Draw() const
 
 void Score::FInalize()
 {
+	DeleteFontToHandle(font_score);
+	DeleteFontToHandle(font_score2);
 }
 
 void Score::AddScore(int point, Vector2D pos)

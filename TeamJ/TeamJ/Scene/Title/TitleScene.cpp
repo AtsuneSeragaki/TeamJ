@@ -188,6 +188,9 @@ void TitleScene::Finalize()
 {
 	StopSoundMem(bgm);
 	play_bgm = false;
+
+	DeleteFontToHandle(font_button);
+	DeleteFontToHandle(font_scene_name);
 }
 
 // 現在のシーン情報を返す

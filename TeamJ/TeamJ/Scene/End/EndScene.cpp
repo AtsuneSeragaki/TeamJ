@@ -38,7 +38,7 @@ void EndScene::Initialize()
 	tmp2 = rm->GetSounds("Resource/Sounds/gun_shot.mp3");
 	sound = tmp2;
 
-	font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
+	//font_button = CreateFontToHandle("Stencil", 40, -1, DX_FONTTYPE_ANTIALIASING_4X4);
 
 	ChangeVolumeSoundMem(127, bgm);
 }
@@ -93,6 +93,7 @@ void EndScene::Draw() const
 // 終了時処理
 void EndScene::Finalize()
 {
+	DeleteGraph(background_image);
 }
 
 // 現在のシーン情報を返す

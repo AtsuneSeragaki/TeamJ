@@ -124,6 +124,10 @@ void RankingScene::Finalize()
 
     //フラグのリセット
     bgm_flg = false;
+
+    DeleteFontToHandle(font_button);
+    DeleteFontToHandle(font_scene_name);
+    DeleteFontToHandle(font_score);
 }
 
 void RankingScene::SortData()

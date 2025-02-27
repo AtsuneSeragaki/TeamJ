@@ -94,4 +94,5 @@ void Time::Draw() const
 
 void Time::FInalize()
 {
+	DeleteFontToHandle(font_time);
 }

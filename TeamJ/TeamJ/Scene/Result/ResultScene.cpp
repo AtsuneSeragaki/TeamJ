@@ -240,6 +240,12 @@ void ResultScene::Finalize()
 
 	// ランキングにスコア登録
 	ranking->SetRank(score);
+
+	DeleteFontToHandle(font_button);
+	DeleteFontToHandle(font_high_score);
+	DeleteFontToHandle(font_rank);
+	DeleteFontToHandle(font_result);
+	DeleteFontToHandle(font_scene_name);
 }
 
 // 現在のシーン情報を返す
