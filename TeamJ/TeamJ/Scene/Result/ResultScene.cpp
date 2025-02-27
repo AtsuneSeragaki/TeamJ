@@ -186,14 +186,14 @@ void ResultScene::Draw() const
 
 	// ランク描画：スコアに応じてランクの表示を変える
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, rank_cnt);
-	if (score >= 20000)
+	if (score >= 15000)
 	{
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 48.0f, 32, 0xfd7e00, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 49.0f, 32, 0xfd7e00, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 50.0f, 32, 0xfd7e00, FALSE);
 		DrawRotaStringToHandle(274 - 30, 264, 1.0f, 1.0f, 45.0f, 45.0f, -PI / 180 * 10.0f, 0xfd7e00, font_rank, 0x000000, FALSE, "S");
 	}
-	else if (score >= 15000)
+	else if (score >= 13000)
 	{
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 48.0f, 32, 0xff0000, FALSE);
 		DrawCircleAA(255.0f - 30.0f, 265.0f, 49.0f, 32, 0xff0000, FALSE);
